@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 export const StyleCommentContainer = styled.div`
   width: 1400px;
-  height: 500px;
-  margin: 16px auto;
+  //height: 500px;
+  margin: 25px auto;
 `;
 export const StyleCommentRegisterBox = styled.div`
   width: 1400px;

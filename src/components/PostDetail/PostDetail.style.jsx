@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const StyledPostContainer = styled.div`
-  background-color: pink;
+  //background-color: pink;
   width: 1400px;
   height: 745px;
   margin: 0 auto;
@@ -18,6 +18,7 @@ export const StyledTitleBox = styled.div`
   justify-content: space-between;
   align-items: center;
   border-radius: 15px;
+  //box-shadow: 0px 1px 7px #b9b9b9;
 `;
 
 export const StyledPostNickname = styled.p`
@@ -63,14 +64,15 @@ export const StyledPostImg = styled.img`
   height: 390px;
   margin-right: 10px;
   border-radius: 15px;
-  border: 1px solid black;
+  box-shadow: 0px 1px 7px #b9b9b9;
 `;
 
 export const StyledLocationBox = styled.div`
-  background-color: #fbd2d8;
+  background-color: #f3f3f3;
   width: 775px;
   height: 390px;
   border-radius: 15px;
+  box-shadow: 0px 1px 7px #b9b9b9;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -79,7 +81,6 @@ export const StyledLocationBox = styled.div`
 `;
 
 export const StyledLocationImg = styled.img`
-  //background-color: #ffdee3;
   border: 1px solid black;
   width: 727px;
   height: 254px;
@@ -103,30 +104,69 @@ export const StyledLocation = styled.p`
   font-size: 16px;
   margin-top: 10px;
 `;
+
 export const StyledPostContentBox = styled.div`
-  background-color: #8484db;
+  background-color: #fff9e3;
+  box-shadow: 0px 1px 5px #b9b9b9;
   width: 1400px;
   height: 240px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
   border-radius: 15px;
 `;
 
 export const StyledContentTop = styled.div`
-  /* background-color: #8484db;
-  width: 1400px;
-  height: 240px;
-  border-radius: 15px; */
+  width: 1285px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
 `;
 
-export const StyleGroupInfoText = styled.div`
-  /* background-color: #8484db;
-  width: 1400px;
-  height: 240px;
-  border-radius: 15px; */
+export const StyleGroupInfo = styled.p`
+  width: 1000px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  font-size: 25px;
+  font-weight: bold;
+`;
+
+export const StyleGroupInfoHead = styled.p`
+  width: 100px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  //border: 1px solid #000000;
+  border-radius: 100px;
+  background-color: #ffd53e;
+  //color: white;
+  font-size: 18px;
+  font-weight: bold;
+`;
+
+export const StyleGroupInfoDate = styled.p`
+  width: 200px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  //border: 1px solid #000000;
+  background-color: #ffd53e;
+  border-radius: 100px;
+  font-size: 18px;
+  font-weight: bold;
 `;
 
 export const StyleContentText = styled.p`
-  /* background-color: #8484db;
-  width: 1400px;
-  height: 240px;
-  border-radius: 15px; */
+  width: 1285px;
+  height: 120px;
+  border-radius: 15px;
+  display: flex;
+  //align-items: center;
+  font-size: 20px;
 `;
