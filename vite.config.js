@@ -1,7 +1,7 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react-swc'
+import { createClient } from '@supabase/supabase-js';
+const SUPABASE_PROJECT_URL = import.meta.env.VITE_SUPABASE_URL;
+const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_KEY;
 
-// https://vitejs.dev/config/
-export default defineConfig({
-  plugins: [react()],
-})
+const supabase = createClient(SUPABASE_PROJECT_URL, SUPABASE_ANON_KEY);
+
+export { supabase };
