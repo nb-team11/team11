@@ -12,7 +12,10 @@ import {
   StyledLocationName,
   StyledLocation,
   StyledContentBox,
-  StyledPostContentBox
+  StyledPostContentBox,
+  StyledContentTop,
+  StyleGroupInfoText,
+  StyleContentText
 } from './PostDetail.style';
 
 const PostDetail = () => {
@@ -34,7 +37,14 @@ const PostDetail = () => {
             </StyledContentBox>
           </StyledLocationBox>
         </StyledVisualInfo>
-        <StyledPostContentBox>g</StyledPostContentBox>
+        <StyledPostContentBox>
+          <StyledContentTop>
+            <StyleGroupInfoText>소모임 정보</StyleGroupInfoText>
+            <StyleGroupInfoText>n명</StyleGroupInfoText>
+            <StyleGroupInfoText>2024년 6월 17일</StyleGroupInfoText>
+          </StyledContentTop>
+          <StyleContentText>내용 내용 내용</StyleContentText>
+        </StyledPostContentBox>
       </StyledPostContainer>
     </>
   );

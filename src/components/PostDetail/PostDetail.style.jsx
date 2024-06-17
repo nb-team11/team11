@@ -26,7 +26,8 @@ export const StyledPostNickname = styled.p`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 25px;
+  font-size: 23px;
+  font-weight: bold;
 `;
 
 export const StyledPostTitle = styled.p`
@@ -74,7 +75,7 @@ export const StyledLocationBox = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 0px;
+  gap: 30px;
 `;
 
 export const StyledLocationImg = styled.img`
@@ -85,10 +86,10 @@ export const StyledLocationImg = styled.img`
 `;
 
 export const StyledContentBox = styled.div`
-  background-color: #b6989c;
+  //background-color: #b6989c;
   width: 727px;
-  height: 90px;
-  //padding-top: 10px;
+  height: 50px;
+  margin-left: 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -100,10 +101,32 @@ export const StyledLocationName = styled.p`
 
 export const StyledLocation = styled.p`
   font-size: 16px;
+  margin-top: 10px;
 `;
 export const StyledPostContentBox = styled.div`
   background-color: #8484db;
   width: 1400px;
   height: 240px;
   border-radius: 15px;
+`;
+
+export const StyledContentTop = styled.div`
+  /* background-color: #8484db;
+  width: 1400px;
+  height: 240px;
+  border-radius: 15px; */
+`;
+
+export const StyleGroupInfoText = styled.div`
+  /* background-color: #8484db;
+  width: 1400px;
+  height: 240px;
+  border-radius: 15px; */
+`;
+
+export const StyleContentText = styled.p`
+  /* background-color: #8484db;
+  width: 1400px;
+  height: 240px;
+  border-radius: 15px; */
 `;
