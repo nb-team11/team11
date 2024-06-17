@@ -20,26 +20,28 @@ const PostComment = () => {
     <>
       <StyleCommentContainer>
         <StyleCommentRegisterBox>
-          <StyleCommentInputBox>
-            <StyleLabel>닉네임</StyleLabel>
-            <StyleInput />
+          <StyleCommentInputBox $width="200">
+            <StyleLabel htmlFor="input-nickname">닉네임</StyleLabel>
+            <StyleInput id="input-nickname" typt="text" />
           </StyleCommentInputBox>
-          <StyleCommentInputBox>
-            <StyleLabel>비밀번호</StyleLabel>
-            <StyleInput />
+          <StyleCommentInputBox $width="200">
+            <StyleLabel htmlFor="input-password">비밀번호</StyleLabel>
+            <StyleInput id="input-password" type="password" />
           </StyleCommentInputBox>
-          <StyleCommentInputBox>
-            <StyleLabel>댓글</StyleLabel>
-            <StyleInput />
+          <StyleCommentInputBox $width="745">
+            <StyleLabel htmlFor="input-comment">댓글</StyleLabel>
+            <StyleInput id="input-comment" />
           </StyleCommentInputBox>
-          <StyleButton>보내기</StyleButton>
+          <StyleButton $marginTop="20">보내기</StyleButton>
         </StyleCommentRegisterBox>
         <StyleCommentList>
           <StyleCommentBox>
             <StyleCommentLeft>
-              <StyleCommentWriter>닉네임</StyleCommentWriter>
-              <StyleCommentContent>댓글내용</StyleCommentContent>
-              <StyleCommentCreatedat>작성시간</StyleCommentCreatedat>
+              <div>
+                <StyleCommentWriter>oneieo</StyleCommentWriter>
+                <StyleCommentCreatedat>작성시간</StyleCommentCreatedat>
+              </div>
+              <StyleCommentContent>저요 꼭 저요 저 아니면 안 돼요</StyleCommentContent>
             </StyleCommentLeft>
             <StyleCommentRight>
               <StyleButton>수정</StyleButton>

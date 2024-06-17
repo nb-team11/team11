@@ -64,7 +64,7 @@ export const StyledPostImg = styled.img`
   height: 390px;
   margin-right: 10px;
   border-radius: 15px;
-  box-shadow: 0px 1px 7px #b9b9b9;
+  box-shadow: 0px 1px 5px #b9b9b9;
 `;
 
 export const StyledLocationBox = styled.div`
@@ -72,7 +72,7 @@ export const StyledLocationBox = styled.div`
   width: 775px;
   height: 390px;
   border-radius: 15px;
-  box-shadow: 0px 1px 7px #b9b9b9;
+  box-shadow: 0px 1px 5px #b9b9b9;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -168,5 +168,5 @@ export const StyleContentText = styled.p`
   border-radius: 15px;
   display: flex;
   //align-items: center;
-  font-size: 20px;
+  font-size: 18px;
 `;
