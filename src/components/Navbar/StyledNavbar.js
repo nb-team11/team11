@@ -46,4 +46,11 @@ export const StyledButton = styled.button`
   margin-right: 50px;
   background-color: transparent;
   border: none;
+  cursor: pointer;
+`;
+
+export const StyledLogoDiv = styled.div`
+  background-image: url('../logobar.png') !important;
+  background-repeat: no-repeat;
+  height: 450px;
 `;
