@@ -149,8 +149,22 @@ export const StyleGroupInfoHead = styled.p`
   font-weight: bold;
 `;
 
+export const StyleGroupInfoCategory = styled.p`
+  width: 100px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  //border: 1px solid #000000;
+  border-radius: 100px;
+  background-color: #ffd53e;
+  //color: white;
+  font-size: 18px;
+  font-weight: bold;
+`;
+
 export const StyleGroupInfoDate = styled.p`
-  width: 200px;
+  width: 180px;
   height: 40px;
   display: flex;
   justify-content: center;

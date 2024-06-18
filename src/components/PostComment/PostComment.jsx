@@ -22,7 +22,7 @@ const PostComment = () => {
         <StyleCommentRegisterBox>
           <StyleCommentInputBox $width="200">
             <StyleLabel htmlFor="input-nickname">닉네임</StyleLabel>
-            <StyleInput id="input-nickname" typt="text" />
+            <StyleInput id="input-nickname" type="text" />
           </StyleCommentInputBox>
           <StyleCommentInputBox $width="200">
             <StyleLabel htmlFor="input-password">비밀번호</StyleLabel>

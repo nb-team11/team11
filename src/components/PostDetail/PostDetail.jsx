@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   StyledPostContainer,
   StyledTitleBox,
@@ -17,20 +17,46 @@ import {
   StyleContentText,
   StyleGroupInfo,
   StyleGroupInfoHead,
-  StyleGroupInfoDate
+  StyleGroupInfoDate,
+  StyleGroupInfoCategory
 } from './PostDetail.style';
+import { supabase } from '../../../supabase/supabase';
+import { useQuery } from '@tanstack/react-query';
+import { getPosts } from '../../../supabase/post.api';
+import { useParams } from 'react-router-dom';
 
 const PostDetail = () => {
+  //   useEffect(() => {
+  //     const getPostData = async () => {
+  //       const { data, error } = await supabase.from('posts_test').select();
+  //       console.log(data);
+  //     };
+  //     getPostData();
+  //   }, []);
+
+  const { id } = useParams();
+  const { data: posts, isPending, isError } = useQuery({ queryKey: ['posts'], queryFn: () => getPosts(id) });
+
+  if (isPending) {
+    return <h1>로딩중입니다~</h1>;
+  }
+
+  if (isError) {
+    return <h1>데이터 조회 중 오류가 발생했습니다.</h1>;
+  }
+
+  const matchedPost = posts[0];
+
   return (
     <>
       <StyledPostContainer>
         <StyledTitleBox>
-          <StyledPostNickname>닉네임</StyledPostNickname>
-          <StyledPostTitle>이따 8시에 공원에서 배드민턴 치실분!!</StyledPostTitle>
-          <StyledPostCreatedAt>2024-06-15</StyledPostCreatedAt>
+          <StyledPostNickname>{matchedPost.user_id}</StyledPostNickname>
+          <StyledPostTitle>{matchedPost.title}</StyledPostTitle>
+          <StyledPostCreatedAt>{matchedPost.created_at.slice(0, 10)}</StyledPostCreatedAt>
         </StyledTitleBox>
         <StyledVisualInfo>
-          <StyledPostImg src="/public/vite.svg" />
+          <StyledPostImg src={matchedPost.image} />
           <StyledLocationBox>
             <StyledLocationImg src="/public/vite.svg" />
             <StyledContentBox>
@@ -42,13 +68,11 @@ const PostDetail = () => {
         <StyledPostContentBox>
           <StyledContentTop>
             <StyleGroupInfo>소모임 정보</StyleGroupInfo>
-            <StyleGroupInfoHead>10명</StyleGroupInfoHead>
-            <StyleGroupInfoDate>2024년 6월 17일</StyleGroupInfoDate>
+            <StyleGroupInfoCategory>{matchedPost.category}</StyleGroupInfoCategory>
+            <StyleGroupInfoHead>{matchedPost.head_count}명</StyleGroupInfoHead>
+            <StyleGroupInfoDate>{matchedPost.time}</StyleGroupInfoDate>
           </StyledContentTop>
-          <StyleContentText>
-            6월 17일에 축구하실분 구합니다!~ 한 게임 할 생각이구용 10명 이상 모집중입니다. 댓글남겨주세요!! 추가
-            문의사항은 댓글이나 오픈카톡: open.~~~.kakao 여기로 연락주세요!
-          </StyleContentText>
+          <StyleContentText>{matchedPost.body}</StyleContentText>
         </StyledPostContentBox>
       </StyledPostContainer>
     </>

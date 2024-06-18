@@ -65,7 +65,7 @@ export const StyleCommentBox = styled.li`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #e3e3e3;
+  background-color: #ebebeb;
 `;
 
 export const StyleCommentLeft = styled.div`
