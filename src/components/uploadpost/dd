@@ -1,0 +1,76 @@
+// 1. useState
+const test = '나는 테스트';
+
+const [age, setAge] = useState();
+const [todoList, setTodoList] = useState();
+
+// age ? 사용할 값
+// setAge ? age를 변경해주는 고마운 친구 / setState가 일어나면 리렌더링
+// setAge(30) => 무한 반복
+
+// 2. useEffect => 이 컴포넌트가 실행될 때 사용하는 녀석
+
+useEffect(() => {
+  console.log('hello');
+  setAge(30); // 100점
+}, []); // 대괄호 안에 값이 없으면 처음 한번만
+
+useEffect(() => {
+  console.log('world');
+  setAge(30); // 80점
+}, [age]); //대괄호 안에 값이 있으면 그 값이 변경될 때마다 실행
+
+// 예시 메인페이지 접근했는데 서버로부터 todoList를 불러와야한다.
+
+// 1. 서버에서 todoList 값을 불러온다. 어떻게? => fetch : 외부 서버로부터 값을 받아오는 친구
+
+// 2. fetch를 어디서 불러오지? => useEffect에서 불러오자
+
+// 3. 불러와서 어디에 넣어줘야하지? => useState
+
+// 동기,
+// 비동기 => fetch, setTimeout, ... => 꼭 순서대로 실행되지 않는다. 완료되지 않아도 차례를 넘길 수 있다.
+
+useEffect(() => {
+  getData();
+}, []);
+
+// async / await
+
+// axios
+
+async function getData() {
+  // 1. fetch쓸 때
+  const response = await fetch('외부 서버 url');
+  const jsonResponse = await response.json();
+
+  //2. axios쓸 때
+  // const response = await axios.get('외부 서버 url')
+
+  console.log(jsonResponse);
+
+  setTodoList(jsonResponse);
+}
+// 단일 페이지 어플리케이션
+// 이동하는 척만 할거야
+// 내가 지금 보고있는 화면을 다시 그리는것. 그리고 url도 변경해주는 것.
+
+// 굉장히 빠르게 이동하는 것 처럼 느껴지고
+
+// url /write
+
+function Router() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/write" element={<WritePage />} />
+        <Route path="/write/:id" element={<WritePage />} />
+        <Route path="/detail/:id" element={<DetailPage />} />
+        <Route path="*" element={<Navigate replace to="/" />} />
+      </Routes>
+    </BrowserRouter>
+  );
+}
+
+export default Router;
