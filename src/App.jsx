@@ -1,21 +1,25 @@
-import { useState } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
-import './App.css';
-import React from 'react'; // 이거 지우면 오류가 나네요...?
-import DetailPage from './pages/DetailPage';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import React from 'react';
+import { Provider } from 'react-redux';
+import store from './redux/store/store';
+import Navbar from './components/Navbar/Navbar';
+import reset from 'styled-reset';
+import { createGlobalStyle } from 'styled-components';
+import MapApI from './components/MapApi/MapApI';
+import AppRouter from './Router/Router';
 
-function App() {
+const Globalstyle = createGlobalStyle`
+  ${reset}
+`;
+
+const App = () => {
   return (
     <>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/post-detail/:id" element={<DetailPage />} />
-        </Routes>
-      </BrowserRouter>
+      <Globalstyle />
+      <Provider store={store}>
+        <AppRouter />
+      </Provider>
     </>
   );
-}
+};
 
 export default App;
