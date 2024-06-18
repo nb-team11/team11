@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Layout from '../pages/Layout/Layout';
 import MapApI from './../components/MapApi/MapApI';
+import DetailPage from './../pages/DetailPage';
 
 const AppRouter = () => {
   return (
