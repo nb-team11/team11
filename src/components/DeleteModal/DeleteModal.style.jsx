@@ -68,7 +68,7 @@ export const StyleButton = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 10px;
+  margin-top: 0px;
   background-color: ${(prop) => prop.$bgColor};
   &:hover {
     background-color: ${(prop) => prop.$bgcHover};
