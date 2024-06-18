@@ -1,7 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
+import mapApiSlice from '../mapApiSlice';
 
 const store = configureStore({
-  reducer: {}
+  reducer: {
+    mapSlice: mapApiSlice
+  }
 });
 
 export default store;

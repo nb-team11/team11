@@ -1,7 +1,14 @@
 import React from 'react';
+import MapApI from './components/MapApi/MapApI';
+import { Provider } from 'react-redux';
+import store from './redux/store/store';
 
 const App = () => {
-  return <div style={{ width: '500px', height: '400px', border: '1px solid red' }}>App</div>;
+  return (
+    <Provider store={store}>
+      <MapApI />
+    </Provider>
+  );
 };
 
 export default App;
