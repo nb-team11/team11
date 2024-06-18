@@ -6,18 +6,24 @@ import reset from 'styled-reset';
 import { createGlobalStyle } from 'styled-components';
 import MapApI from './components/MapApi/MapApI';
 import AppRouter from './Router/Router';
+import GlobalStyle from './GlobalStyle';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
-const Globalstyle = createGlobalStyle`
-  ${reset}
-`;
+// const Globalstyle = createGlobalStyle`
+//   ${reset}
+// `;
+
+const queryClient = new QueryClient();
 
 const App = () => {
   return (
     <>
-      <Globalstyle />
-      <Provider store={store}>
-        <AppRouter />
-      </Provider>
+      <QueryClientProvider client={queryClient}>
+        <GlobalStyle />
+        <Provider store={store}>
+          <AppRouter />
+        </Provider>
+      </QueryClientProvider>
     </>
   );
 };
