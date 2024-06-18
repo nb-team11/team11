@@ -12,7 +12,7 @@ export const Navbar = () => {
         <StyledInputDiv>
           <label htmlFor="searchTitle"></label>
           <img src="/public/search.png" />
-          <input type="text" id="searchTitle" />
+          <input type="text" id="searchTitle" placeholder="카테고리를 검색해보세요." />
         </StyledInputDiv>
         <StyledButton onClick={() => navigate('/')}>Home</StyledButton>
       </StyledNavBarDiv>
