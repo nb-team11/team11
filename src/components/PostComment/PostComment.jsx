@@ -19,6 +19,7 @@ import { getComments } from '../../../supabase/comment.api';
 import { uploadComment } from '../../../supabase/comment.api';
 import DeleteModal from '../DeleteModal/DeleteModal';
 import { useParams } from 'react-router-dom';
+import EditModal from '../EditModal/EditModal';
 
 const PostComment = () => {
   const queryClient = useQueryClient();
@@ -27,6 +28,7 @@ const PostComment = () => {
   const [password, setPassword] = useState('');
   const [comment, setComment] = useState('');
   const [commentId, setCommentId] = useState(null);
+  const [editModalOpen, setEditModalOpen] = useState(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const { mutate: uploadCommentMutate } = useMutation({
     mutationFn: uploadComment,
@@ -98,7 +100,6 @@ const PostComment = () => {
                     <StyleCommentWriter>{comment.user_id}</StyleCommentWriter>
                     <StyleCommentCreatedat>{comment.created_at.slice(0, 10)}</StyleCommentCreatedat>
                   </div>
-
                   <StyleCommentContent>{comment.content}</StyleCommentContent>
                 </StyleCommentLeft>
                 <StyleCommentRight>
@@ -112,6 +113,7 @@ const PostComment = () => {
           })}
         </StyleCommentList>
         {deleteModalOpen && <DeleteModal setDeleteModalOpen={setDeleteModalOpen} commentId={commentId} />}
+        {!editModalOpen && <EditModal />}
       </StyleCommentContainer>
     </>
   );

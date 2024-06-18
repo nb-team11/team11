@@ -58,10 +58,10 @@ const DeleteModal = ({ setDeleteModalOpen, commentId }) => {
             onChange={(e) => setPassword(e.target.value)}
           />
           <StyleButtonBox>
-            <StyleButton $bgColor="grey" onClick={handleBackBtn}>
+            <StyleButton $bgColor="#b1b1b1" $bgcHover="#898989" onClick={handleBackBtn}>
               취소
             </StyleButton>
-            <StyleButton $bgColor="skyblue" onClick={handleCommentDelBtn}>
+            <StyleButton $bgColor="#ffd532" $bgcHover="#dcb51b" onClick={handleCommentDelBtn}>
               삭제
             </StyleButton>
           </StyleButtonBox>

@@ -48,23 +48,23 @@ export const StyleInput = styled.input`
 
 export const StyleButtonBox = styled.div`
   display: flex;
-  gap: 55px;
+  gap: 60px;
   margin-top: 20px;
 `;
 
 export const StyleButton = styled.div`
-  width: 80px;
-  height: 40px;
+  width: 70px;
+  height: 30px;
   border: none;
   border-radius: 15px;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: bold;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: ${(prop) => prop.$bgColor};
   &:hover {
-    background-color: #b1b1b1;
+    background-color: ${(prop) => prop.$bgcHover};
     transition: 0.3s;
     cursor: pointer;
   }
