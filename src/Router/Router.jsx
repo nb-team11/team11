@@ -9,6 +9,7 @@ const AppRouter = () => {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route path="mapapi" element={<MapApI />} />
+          <Route path="/post-detail/:id" element={<DetailPage />} />
           {/* 여기에 추가해주시면 됩니당(LayOut은 navbaer와 footer예정) */}
         </Route>
       </Routes>
