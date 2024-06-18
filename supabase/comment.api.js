@@ -30,6 +30,8 @@ export const uploadComment = async (comment) => {
   }
 };
 
+// export const editComment =
+
 export const deleteComment = async (commentId) => {
   try {
     const { data } = await supabase.from('comments_test').delete().eq('id', commentId);

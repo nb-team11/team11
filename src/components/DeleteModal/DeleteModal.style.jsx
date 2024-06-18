@@ -27,6 +27,7 @@ export const StyleDeleteTitle = styled.h2`
   font-size: 20px;
   font-weight: bold;
   margin-top: 40px;
+  margin-bottom: 10px;
 `;
 
 export const StyleDeleteMent = styled.p`
@@ -37,9 +38,9 @@ export const StyleDeleteMent = styled.p`
 `;
 
 export const StyleInput = styled.input`
-  width: 200px;
-  height: 20px;
-  margin-top: 20px;
+  width: 290px;
+  height: 30px;
+  margin-top: 10px;
   border: none;
   border-radius: 10px;
   background-color: #ededed;
@@ -67,6 +68,7 @@ export const StyleButton = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 10px;
   background-color: ${(prop) => prop.$bgColor};
   &:hover {
     background-color: ${(prop) => prop.$bgcHover};

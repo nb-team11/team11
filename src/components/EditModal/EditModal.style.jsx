@@ -24,9 +24,9 @@ export const StyleContainer = styled.div`
 `;
 
 export const StyleEditTitle = styled.h2`
-  font-size: 20px;
+  font-size: 22px;
   font-weight: bold;
-  margin-top: 30px;
+  margin-top: 28px;
   margin-bottom: 10px;
 `;
 
@@ -37,7 +37,7 @@ export const StyleInputBox = styled.p`
 `;
 
 export const StyleLabel = styled.label`
-  font-size: 15px;
+  font-size: 16px;
   font-weight: bold;
   margin-top: 10px;
   margin-left: 5px;
@@ -45,12 +45,14 @@ export const StyleLabel = styled.label`
 
 export const StyleInput = styled.input`
   width: 375px;
-  height: 20px;
+  height: 30px;
   margin-top: 10px;
+  margin-bottom: 10px;
   border: none;
   border-radius: 10px;
   background-color: #ededed;
   text-indent: 10px;
+  font-size: 15px;
   font-family: 'Pretendard-Regular';
   &:focus {
     outline: none;
@@ -61,6 +63,7 @@ export const StyleInput = styled.input`
 export const StyleButtonBox = styled.div`
   display: flex;
   gap: 60px;
+  margin-top: 6px;
 `;
 
 export const StyleButton = styled.div`
