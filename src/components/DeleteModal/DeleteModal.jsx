@@ -8,7 +8,7 @@ import {
   StyleDeleteTitle,
   StyleInput
 } from './DeleteModal.style';
-import { useMutation, useQuery, useQueryClient, useQueryErrorResetBoundary } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { deleteComment, getComment } from '../../../supabase/comment.api';
 
 const DeleteModal = ({ setDeleteModalOpen, commentId }) => {

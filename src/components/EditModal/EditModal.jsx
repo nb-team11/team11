@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import {
   StyleBackGround,
   StyleButton,
@@ -37,7 +37,6 @@ const EditModal = ({ setEditModalOpen, commentId }) => {
   };
 
   const matchedComment = comment.find((data) => data.id === commentId);
-  console.log(matchedComment);
 
   const handleConfirmBtn = () => {
     const editedComment = {
