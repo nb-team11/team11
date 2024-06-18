@@ -9,8 +9,16 @@ import {
   StyleInputBox,
   StyleLabel
 } from './EditModal.style';
+import { useQuery } from '@tanstack/react-query';
+import { getComment } from '../../../supabase/comment.api';
 
-const EditModal = () => {
+const EditModal = ({ setEditModalOpen, commentId }) => {
+  const {
+    data: matchedComment,
+    isPending,
+    isError
+  } = useQuery({ queryKey: ['matchedComment'], queryFn: () => getComment(commentId) });
+
   return (
     <>
       <StyleBackGround>

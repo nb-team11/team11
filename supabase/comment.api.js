@@ -16,7 +16,7 @@ export const getComment = async (id) => {
     return data;
   } catch (error) {
     console.error('Error => ', error);
-    alert('삭제할 댓글 데이터 불러오기 실패!');
+    alert('수정 또는 삭제할 댓글 데이터 불러오기 실패!');
   }
 };
 
@@ -36,6 +36,6 @@ export const deleteComment = async (commentId) => {
     return data;
   } catch (error) {
     console.error('Error => ', error);
-    alert('댓글 삭제 실패');
+    alert('댓글 삭제 실패!');
   }
 };

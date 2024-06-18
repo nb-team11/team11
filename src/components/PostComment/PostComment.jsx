@@ -56,7 +56,12 @@ const PostComment = () => {
     setComment('');
   };
 
-  const handleDelBtn = async (commentId) => {
+  const handleModiBtn = (commentId) => {
+    setEditModalOpen(true);
+    setCommentId(commentId);
+  };
+
+  const handleDelBtn = (commentId) => {
     setDeleteModalOpen(true);
     setCommentId(commentId);
   };
@@ -103,7 +108,9 @@ const PostComment = () => {
                   <StyleCommentContent>{comment.content}</StyleCommentContent>
                 </StyleCommentLeft>
                 <StyleCommentRight>
-                  <StyleButton $width="60">수정</StyleButton>
+                  <StyleButton $width="60" onClick={() => handleModiBtn(comment.id)}>
+                    수정
+                  </StyleButton>
                   <StyleButton $width="60" onClick={() => handleDelBtn(comment.id)}>
                     삭제
                   </StyleButton>
@@ -112,8 +119,8 @@ const PostComment = () => {
             );
           })}
         </StyleCommentList>
+        {editModalOpen && <EditModal setEditModalOpen={setEditModalOpen} commentId={commentId} />}
         {deleteModalOpen && <DeleteModal setDeleteModalOpen={setDeleteModalOpen} commentId={commentId} />}
-        {!editModalOpen && <EditModal setEditModalOpen={setEditModalOpen} commentId={commentId} />}
       </StyleCommentContainer>
     </>
   );
