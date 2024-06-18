@@ -26,7 +26,7 @@ export const StyleCommentInputBox = styled.div`
 
 export const StyleLabel = styled.label`
   font-size: 20px;
-  margin-bottom: 25px;
+  margin-bottom: 10px;
   text-indent: 10px;
 `;
 

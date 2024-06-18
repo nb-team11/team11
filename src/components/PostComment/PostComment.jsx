@@ -113,7 +113,7 @@ const PostComment = () => {
           })}
         </StyleCommentList>
         {deleteModalOpen && <DeleteModal setDeleteModalOpen={setDeleteModalOpen} commentId={commentId} />}
-        {!editModalOpen && <EditModal />}
+        {!editModalOpen && <EditModal setEditModalOpen={setEditModalOpen} commentId={commentId} />}
       </StyleCommentContainer>
     </>
   );
