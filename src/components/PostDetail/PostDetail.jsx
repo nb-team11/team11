@@ -20,22 +20,14 @@ import {
   StyleGroupInfoDate,
   StyleGroupInfoCategory
 } from './PostDetail.style';
-import { supabase } from '../../../supabase/supabase';
 import { useQuery } from '@tanstack/react-query';
-import { getPosts } from '../../../supabase/post.api';
+import { getPost } from '../../../supabase/post.api';
 import { useParams } from 'react-router-dom';
 
 const PostDetail = () => {
-  //   useEffect(() => {
-  //     const getPostData = async () => {
-  //       const { data, error } = await supabase.from('posts_test').select();
-  //       console.log(data);
-  //     };
-  //     getPostData();
-  //   }, []);
-
   const { id } = useParams();
-  const { data: posts, isPending, isError } = useQuery({ queryKey: ['posts'], queryFn: () => getPosts(id) });
+  const { data: post, isPending, isError } = useQuery({ queryKey: ['post'], queryFn: () => getPost(id) });
+  // custom hook으로 만들면 관리하기 편함
 
   if (isPending) {
     return <h1>로딩중입니다~</h1>;
@@ -45,7 +37,7 @@ const PostDetail = () => {
     return <h1>데이터 조회 중 오류가 발생했습니다.</h1>;
   }
 
-  const matchedPost = posts[0];
+  const matchedPost = post[0];
 
   return (
     <>

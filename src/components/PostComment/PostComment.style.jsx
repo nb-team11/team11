@@ -77,6 +77,7 @@ export const StyleCommentLeft = styled.div`
 
 export const StyleCommentRight = styled.div`
   display: flex;
+  align-items: center;
   margin-right: 30px;
   gap: 20px;
 `;
