@@ -42,8 +42,13 @@ export const StyleInput = styled.input`
   margin-top: 20px;
   border: none;
   border-radius: 10px;
-  background-color: #e4e4e4;
+  background-color: #ededed;
   text-indent: 10px;
+  font-family: 'Pretendard-Regular';
+  &:focus {
+    outline: none;
+    background-color: #d6d6d6;
+  }
 `;
 
 export const StyleButtonBox = styled.div`

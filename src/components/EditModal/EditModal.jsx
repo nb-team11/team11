@@ -21,11 +21,9 @@ const EditModal = () => {
             <StyleInput placeholder="비밀번호를 입력하세요." />
           </StyleInputBox>
           <StyleInputBox>
-            {' '}
             <StyleLabel>댓글</StyleLabel>
             <StyleInput placeholder="수정할 내용을 입력하세요." />
           </StyleInputBox>
-
           <StyleButtonBox>
             <StyleButton $bgColor="#b1b1b1" $bgcHover="#898989">
               취소
