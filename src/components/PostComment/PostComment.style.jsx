@@ -26,7 +26,7 @@ export const StyleCommentInputBox = styled.div`
 
 export const StyleLabel = styled.label`
   font-size: 20px;
-  margin-bottom: 10px;
+  margin-bottom: 25px;
   text-indent: 10px;
 `;
 
@@ -35,9 +35,16 @@ export const StyleInput = styled.input`
   background-color: #dfdfdf;
   height: 30px;
   border-radius: 20px;
+  text-indent: 15px;
+  font-size: 17px;
+  &:focus {
+    outline: none;
+    background-color: #c4c4c4;
+  }
 `;
+
 export const StyleButton = styled.button`
-  width: 100px;
+  width: ${(prop) => `${prop.$width}px`};
   height: 40px;
   border: none;
   border-radius: 15px;
@@ -56,7 +63,7 @@ export const StyleButton = styled.button`
 export const StyleCommentList = styled.ul`
   width: 1400px;
   height: 500px;
-  margin-top: 20px;
+  margin-top: 25px;
 `;
 
 export const StyleCommentBox = styled.li`
@@ -66,11 +73,12 @@ export const StyleCommentBox = styled.li`
   justify-content: space-between;
   align-items: center;
   background-color: #ebebeb;
+  margin-top: 10px;
 `;
 
 export const StyleCommentLeft = styled.div`
   display: flex;
-  margin-left: 30px;
+  margin-left: 40px;
   display: flex;
   align-items: center;
 `;
@@ -78,24 +86,30 @@ export const StyleCommentLeft = styled.div`
 export const StyleCommentRight = styled.div`
   display: flex;
   align-items: center;
-  margin-right: 30px;
-  gap: 20px;
+  margin-right: 40px;
+  gap: 10px;
 `;
 
 export const StyleCommentWriter = styled.p`
+  width: 100px;
   font-size: 20px;
   font-weight: bold;
 `;
 
 export const StyleCommentCreatedat = styled.p`
+  width: 100px;
   font-size: 15px;
-  text-indent: 10px;
   color: grey;
-  //font-weight: bold;
+  margin-top: 5px;
 `;
 
 export const StyleCommentContent = styled.p`
+  width: 1000px;
+  height: 20px;
   font-size: 18px;
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
   //font-weight: bold;
-  text-indent: 20px;
+  //text-indent: 20px;
 `;
