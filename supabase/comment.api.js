@@ -30,7 +30,15 @@ export const uploadComment = async (comment) => {
   }
 };
 
-// export const editComment =
+export const editComment = async (editedComment) => {
+  try {
+    const { data } = await supabase.from('comments_test').update(editedComment).eq('id', editedComment.id);
+    return data;
+  } catch (error) {
+    console.error('Error => ', error);
+    alert('댓글 수정 실패!');
+  }
+};
 
 export const deleteComment = async (commentId) => {
   try {

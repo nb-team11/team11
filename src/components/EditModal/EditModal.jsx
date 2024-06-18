@@ -9,23 +9,46 @@ import {
   StyleInputBox,
   StyleLabel
 } from './EditModal.style';
-import { useQuery } from '@tanstack/react-query';
-import { getComment } from '../../../supabase/comment.api';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { editComment, getComment } from '../../../supabase/comment.api';
 
 const EditModal = ({ setEditModalOpen, commentId }) => {
   const refPassword = useRef(null);
   const refComment = useRef(null);
+  const queryClient = useQueryClient();
+  const { mutate: editCommentMutate } = useMutation({
+    mutationFn: editComment,
+    onSuccess: () => {
+      queryClient.invalidateQueries(['comments']);
+    }
+  });
 
   const {
-    data: matchedComment,
+    data: comment,
     isPending,
     isError
-  } = useQuery({ queryKey: ['matchedComment'], queryFn: () => getComment(commentId) });
+  } = useQuery({ queryKey: ['comment'], queryFn: () => getComment(commentId) });
 
   if (isPending) return <h1>로딩중입니다.</h1>;
   if (isError) return <h1>수정할 댓글 데이터 조회 중 오류가 발생했습니다.</h1>;
 
   const handleCancelBtn = () => {
+    setEditModalOpen(false);
+  };
+
+  const matchedComment = comment.find((data) => data.id === commentId);
+  console.log(matchedComment);
+
+  const handleConfirmBtn = () => {
+    const editedComment = {
+      ...matchedComment,
+      content: refComment.current.value
+    };
+    if (matchedComment.user_pw !== refPassword.current.value) {
+      alert('비밀번호가 일치하지 않습니다.');
+      return;
+    }
+    editCommentMutate(editedComment);
     setEditModalOpen(false);
   };
 
@@ -43,14 +66,14 @@ const EditModal = ({ setEditModalOpen, commentId }) => {
             <StyleInput
               placeholder="수정할 내용을 입력하세요."
               ref={refComment}
-              defaultValue={matchedComment[0].content}
+              defaultValue={matchedComment.content}
             />
           </StyleInputBox>
           <StyleButtonBox>
             <StyleButton $bgColor="#b1b1b1" $bgcHover="#898989" onClick={handleCancelBtn}>
               취소
             </StyleButton>
-            <StyleButton $bgColor="#ffd532" $bgcHover="#dcb51b">
+            <StyleButton $bgColor="#ffd532" $bgcHover="#dcb51b" onClick={handleConfirmBtn}>
               확인
             </StyleButton>
           </StyleButtonBox>
