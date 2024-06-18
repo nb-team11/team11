@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import React from 'react';
-import { StyledButton, StyledInputDiv, StyledNavBarDiv, StyledTitle } from './StyledNavbar';
+import { StyledButton, StyledInputDiv, StyledLogoDiv, StyledNavBarDiv, StyledTitle } from './StyledNavbar';
 
 export const Navbar = () => {
   const navigate = useNavigate();
@@ -8,16 +8,14 @@ export const Navbar = () => {
   return (
     <>
       <StyledNavBarDiv>
-        <StyledTitle>TownTalk</StyledTitle>
-
+        <StyledTitle src="/public/towntalk_logo.png" />
         <StyledInputDiv>
-          <label htmlFor="searchTitle">Search</label>
+          <label htmlFor="searchTitle"></label>
+          <img src="/public/search.png" />
           <input type="text" id="searchTitle" />
         </StyledInputDiv>
-
         <StyledButton onClick={() => navigate('/')}>Home</StyledButton>
       </StyledNavBarDiv>
-
       <StyledLogoDiv></StyledLogoDiv>
     </>
   );

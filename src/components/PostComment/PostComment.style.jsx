@@ -4,6 +4,7 @@ export const StyleCommentContainer = styled.div`
   width: 1400px;
   //height: 500px;
   margin: 25px auto;
+  font-family: 'Pretendard-Regular';
 `;
 
 export const StyleCommentRegisterBox = styled.form`
