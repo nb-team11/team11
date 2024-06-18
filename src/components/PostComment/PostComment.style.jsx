@@ -91,7 +91,7 @@ export const StyleCommentRight = styled.div`
 `;
 
 export const StyleCommentWriter = styled.p`
-  width: 100px;
+  width: 110px;
   font-size: 20px;
   font-weight: bold;
 `;

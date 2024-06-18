@@ -26,20 +26,30 @@ export const StyleContainer = styled.div`
 export const StyleDeleteTitle = styled.h2`
   font-size: 20px;
   font-weight: bold;
-  margin-top: 50px;
+  margin-top: 40px;
 `;
 
 export const StyleDeleteMent = styled.p`
   font-size: 15px;
   font-weight: bold;
   color: #6f6f6f;
-  margin-top: 35px;
+  margin-top: 25px;
+`;
+
+export const StyleInput = styled.input`
+  width: 200px;
+  height: 20px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 10px;
+  background-color: #e4e4e4;
+  text-indent: 10px;
 `;
 
 export const StyleButtonBox = styled.div`
   display: flex;
   gap: 55px;
-  margin-top: 30px;
+  margin-top: 20px;
 `;
 
 export const StyleButton = styled.div`

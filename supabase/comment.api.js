@@ -10,6 +10,16 @@ export const getComments = async (id) => {
   }
 };
 
+export const getComment = async (id) => {
+  try {
+    const { data } = await supabase.from('comments_test').select().eq('id', id);
+    return data;
+  } catch (error) {
+    console.error('Error => ', error);
+    alert('삭제할 댓글 데이터 불러오기 실패!');
+  }
+};
+
 export const uploadComment = async (comment) => {
   try {
     const { data } = await supabase.from('comments_test').insert(comment);
