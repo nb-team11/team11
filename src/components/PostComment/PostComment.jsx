@@ -17,19 +17,24 @@ import {
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { getComments } from '../../../supabase/comment.api';
 import { uploadComment } from '../../../supabase/comment.api';
+import DeleteModal from '../DeleteModal/DeleteModal';
+import { useParams } from 'react-router-dom';
 
 const PostComment = () => {
   const queryClient = useQueryClient();
+  const { id } = useParams();
   const [nickname, setNickname] = useState('');
   const [password, setPassword] = useState('');
   const [comment, setComment] = useState('');
+  const [commentId, setCommentId] = useState(null);
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const { mutate: uploadCommentMutate } = useMutation({
     mutationFn: uploadComment,
     onSuccess: () => {
       queryClient.invalidateQueries(['comments']);
     }
   });
-  const { data: comments, isPending, isError } = useQuery({ queryKey: ['comments'], queryFn: getComments });
+  const { data: comments, isPending, isError } = useQuery({ queryKey: ['comments'], queryFn: () => getComments(id) });
   if (isPending) return <h1>로딩중입니다 ~</h1>;
   if (isError) return <h1>댓글 데이터 조회 중 오류 발생 ~</h1>;
 
@@ -38,11 +43,20 @@ const PostComment = () => {
     const newComment = {
       user_id: nickname,
       user_pw: password,
-      content: comment
+      content: comment,
+      post_id: id
     };
 
     // 유효성 검사 추가
     uploadCommentMutate(newComment);
+    setNickname('');
+    setPassword('');
+    setComment('');
+  };
+
+  const handleDelBtn = async (commentId) => {
+    setDeleteModalOpen(true);
+    setCommentId(commentId);
   };
 
   return (
@@ -89,12 +103,15 @@ const PostComment = () => {
                 </StyleCommentLeft>
                 <StyleCommentRight>
                   <StyleButton $width="60">수정</StyleButton>
-                  <StyleButton $width="60">삭제</StyleButton>
+                  <StyleButton $width="60" onClick={() => handleDelBtn(comment.id)}>
+                    삭제
+                  </StyleButton>
                 </StyleCommentRight>
               </StyleCommentBox>
             );
           })}
         </StyleCommentList>
+        {deleteModalOpen && <DeleteModal setDeleteModalOpen={setDeleteModalOpen} commentId={commentId} />}
       </StyleCommentContainer>
     </>
   );
