@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
-import { StyledButton, StyledInputDiv, StyledNavBarDiv, StyledTitle, StyledLogoDiv } from './StyledNavbar';
+import React from 'react';
+import { StyledButton, StyledInputDiv, StyledLogoDiv, StyledNavBarDiv, StyledTitle } from './StyledNavbar';
 
 export const Navbar = () => {
   const navigate = useNavigate();
@@ -7,16 +8,14 @@ export const Navbar = () => {
   return (
     <>
       <StyledNavBarDiv>
-        <StyledTitle>TownTalk</StyledTitle>
-
+        <StyledTitle src="/public/towntalk_logo.png" />
         <StyledInputDiv>
-          <label htmlFor="searchTitle">Search</label>
-          <input type="text" id="searchTitle" />
+          <label htmlFor="searchTitle"></label>
+          <img src="/public/search.png" />
+          <input type="text" id="searchTitle" placeholder="카테고리를 검색해보세요." />
         </StyledInputDiv>
-
         <StyledButton onClick={() => navigate('/')}>Home</StyledButton>
       </StyledNavBarDiv>
-
       <StyledLogoDiv></StyledLogoDiv>
     </>
   );

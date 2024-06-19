@@ -21,6 +21,7 @@ export const StyleContainer = styled.div`
   flex-direction: column;
   align-items: center;
   position: fixed;
+  font-family: 'Pretendard-Regular';
 `;
 
 export const StyleDeleteTitle = styled.h2`
@@ -28,6 +29,7 @@ export const StyleDeleteTitle = styled.h2`
   font-weight: bold;
   margin-top: 40px;
   margin-bottom: 10px;
+  font-family: 'Pretendard-Regular';
 `;
 
 export const StyleDeleteMent = styled.p`
