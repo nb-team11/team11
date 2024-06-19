@@ -22,7 +22,6 @@ import DeleteModal from '../DeleteModal/DeleteModal';
 import { useParams } from 'react-router-dom';
 import EditModal from '../EditModal/EditModal';
 import { checkLength } from './commentValidation';
-import SelectCategory from '../SelectCategory/SelectCategory';
 
 const PostComment = () => {
   const queryClient = useQueryClient();
