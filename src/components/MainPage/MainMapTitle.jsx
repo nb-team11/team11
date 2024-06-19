@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { StyledSearchContainer, StyledSearchIcon, StyledSearchLocation, StyledSearchTitle } from './Styled111';
-import { setUserPlace } from '../redux/mainTitleSlice';
-import { setUserLat, setUserLng } from '../redux/mapApiSlice';
+import { setUserLat, setUserLng } from '../../redux/mapApiSlice';
+import { setUserPlace } from '../../redux/mainTitleSlice';
 
 function MainMapTitle() {
   const dispatch = useDispatch();
