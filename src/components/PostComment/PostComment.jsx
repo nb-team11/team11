@@ -1,18 +1,19 @@
-import React, { useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import {
-  StyleButton,
-  StyleCommentBox,
-  StyleCommentContainer,
-  StyleCommentContent,
-  StyleCommentCreatedat,
-  StyleCommentInputBox,
-  StyleCommentLeft,
-  StyleCommentList,
-  StyleCommentRegisterBox,
-  StyleCommentRight,
-  StyleCommentWriter,
-  StyleInput,
-  StyleLabel
+  StyledButton,
+  StyledCommentBox,
+  StyledCommentContainer,
+  StyledCommentContent,
+  StyledCommentCreatedat,
+  StyledCommentInputBox,
+  StyledCommentLeft,
+  StyledCommentList,
+  StyledCommentRegisterBox,
+  StyledCommentRight,
+  StyledCommentWriter,
+  StyledInput,
+  StyledLabel,
+  StyledNotice
 } from './PostComment.style';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { getComments } from '../../../supabase/comment.api';
@@ -20,6 +21,7 @@ import { uploadComment } from '../../../supabase/comment.api';
 import DeleteModal from '../DeleteModal/DeleteModal';
 import { useParams } from 'react-router-dom';
 import EditModal from '../EditModal/EditModal';
+import { checkLength } from './commentValidation';
 
 const PostComment = () => {
   const queryClient = useQueryClient();
@@ -27,9 +29,13 @@ const PostComment = () => {
   const [nickname, setNickname] = useState('');
   const [password, setPassword] = useState('');
   const [comment, setComment] = useState('');
+  const noticeRef1 = useRef();
+  const noticeRef2 = useRef();
+  const noticeRef3 = useRef();
   const [commentId, setCommentId] = useState(null);
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+
   const { mutate: uploadCommentMutate } = useMutation({
     mutationFn: uploadComment,
     onSuccess: () => {
@@ -37,6 +43,15 @@ const PostComment = () => {
     }
   });
   const { data: comments, isPending, isError } = useQuery({ queryKey: ['comments'], queryFn: () => getComments(id) });
+
+  useEffect(() => {
+    if (comments) {
+      noticeRef1.current.style.display = 'none';
+      noticeRef2.current.style.display = 'none';
+      noticeRef3.current.style.display = 'none';
+    }
+  }, [comments]);
+
   if (isPending) return <h1>로딩중입니다 ~</h1>;
   if (isError) return <h1>댓글 데이터 조회 중 오류 발생 ~</h1>;
 
@@ -48,8 +63,21 @@ const PostComment = () => {
       content: comment,
       post_id: id
     };
-
     // 유효성 검사 추가
+
+    if (!checkLength(nickname, 4, 8)) {
+      noticeRef1.current.style.display = 'block';
+      return;
+    }
+    if (!checkLength(password, 4, 15)) {
+      noticeRef2.current.style.display = 'block';
+      return;
+    }
+    if (!checkLength(comment, 1, 100)) {
+      noticeRef3.current.style.display = 'block';
+      return;
+    }
+
     uploadCommentMutate(newComment);
     setNickname('');
     setPassword('');
@@ -68,60 +96,63 @@ const PostComment = () => {
 
   return (
     <>
-      <StyleCommentContainer>
-        <StyleCommentRegisterBox onSubmit={handleSubmitComment}>
-          <StyleCommentInputBox $width="200">
-            <StyleLabel htmlFor="input-nickname">닉네임</StyleLabel>
-            <StyleInput
+      <StyledCommentContainer>
+        <StyledCommentRegisterBox onSubmit={handleSubmitComment}>
+          <StyledCommentInputBox $width="200">
+            <StyledLabel htmlFor="input-nickname">닉네임</StyledLabel>
+            <StyledInput
               id="input-nickname"
               type="text"
               value={nickname}
               onChange={(e) => setNickname(e.target.value)}
             />
-          </StyleCommentInputBox>
-          <StyleCommentInputBox $width="200">
-            <StyleLabel htmlFor="input-password">비밀번호</StyleLabel>
-            <StyleInput
+            <StyledNotice ref={noticeRef1}>4자 ~ 8자로 입력해주세요.</StyledNotice>
+          </StyledCommentInputBox>
+          <StyledCommentInputBox $width="200">
+            <StyledLabel htmlFor="input-password">비밀번호</StyledLabel>
+            <StyledInput
               id="input-password"
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-          </StyleCommentInputBox>
-          <StyleCommentInputBox $width="745">
-            <StyleLabel htmlFor="input-comment">댓글</StyleLabel>
-            <StyleInput id="input-comment" type="text" value={comment} onChange={(e) => setComment(e.target.value)} />
-          </StyleCommentInputBox>
-          <StyleButton $marginTop="20" $width="100">
+            <StyledNotice ref={noticeRef2}>4자 ~ 15자로 입력해주세요.</StyledNotice>
+          </StyledCommentInputBox>
+          <StyledCommentInputBox $width="745">
+            <StyledLabel htmlFor="input-comment">댓글</StyledLabel>
+            <StyledInput id="input-comment" type="text" value={comment} onChange={(e) => setComment(e.target.value)} />
+            <StyledNotice ref={noticeRef3}>댓글을 입력해주세요.(100자 이내)</StyledNotice>
+          </StyledCommentInputBox>
+          <StyledButton $marginTop="20" $width="100">
             보내기
-          </StyleButton>
-        </StyleCommentRegisterBox>
-        <StyleCommentList>
+          </StyledButton>
+        </StyledCommentRegisterBox>
+        <StyledCommentList>
           {comments.map((comment) => {
             return (
-              <StyleCommentBox key={comment.id}>
-                <StyleCommentLeft>
+              <StyledCommentBox key={comment.id}>
+                <StyledCommentLeft>
                   <div>
-                    <StyleCommentWriter>{comment.user_id}</StyleCommentWriter>
-                    <StyleCommentCreatedat>{comment.created_at.slice(0, 10)}</StyleCommentCreatedat>
+                    <StyledCommentWriter>{comment.user_id}</StyledCommentWriter>
+                    <StyledCommentCreatedat>{comment.created_at.slice(0, 10)}</StyledCommentCreatedat>
                   </div>
-                  <StyleCommentContent>{comment.content}</StyleCommentContent>
-                </StyleCommentLeft>
-                <StyleCommentRight>
-                  <StyleButton $width="60" onClick={() => handleModiBtn(comment.id)}>
+                  <StyledCommentContent>{comment.content}</StyledCommentContent>
+                </StyledCommentLeft>
+                <StyledCommentRight>
+                  <StyledButton $width="60" onClick={() => handleModiBtn(comment.id)}>
                     수정
-                  </StyleButton>
-                  <StyleButton $width="60" onClick={() => handleDelBtn(comment.id)}>
+                  </StyledButton>
+                  <StyledButton $width="60" onClick={() => handleDelBtn(comment.id)}>
                     삭제
-                  </StyleButton>
-                </StyleCommentRight>
-              </StyleCommentBox>
+                  </StyledButton>
+                </StyledCommentRight>
+              </StyledCommentBox>
             );
           })}
-        </StyleCommentList>
+        </StyledCommentList>
         {editModalOpen && <EditModal setEditModalOpen={setEditModalOpen} commentId={commentId} />}
         {deleteModalOpen && <DeleteModal setDeleteModalOpen={setDeleteModalOpen} commentId={commentId} />}
-      </StyleCommentContainer>
+      </StyledCommentContainer>
     </>
   );
 };

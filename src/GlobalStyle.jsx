@@ -6,7 +6,7 @@ ${reset}
 
 body {
   width: 100%;
-  font-family: 'SUITE-Regular';
+  font-family: 'Pretendard-Regular';
   &::-webkit-scrollbar {
     display: none;
   }
