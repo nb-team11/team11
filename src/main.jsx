@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 import React from 'react';
 import App from './App';
 import ReactDOM from 'react-dom/client';
@@ -25,4 +23,3 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     </Provider>
   </>
 );
->>>>>>> dde64f2772e5853a65e317adbe23d4ca3df8161c

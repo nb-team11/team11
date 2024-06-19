@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
 const StyledSearchContainer = styled.div`
@@ -32,6 +33,27 @@ const StyledSearchTitle = styled.h2`
 `;
 
 function MainMapTitle() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          dispatch(setUserLat(position.coords.latitude));
+          dispatch(setUserLng(position.coords.longitude));
+        },
+        (error) => {
+          console.error('Error occurred. Error code: ' + error.code);
+        },
+        {
+          enableHighAccuracy: true,
+          maximumAge: 0,
+          timeout: 5000
+        }
+      );
+    }
+  }, [dispatch]);
+
   return (
     <StyledSearchContainer>
       <StyledSearchLocation>
