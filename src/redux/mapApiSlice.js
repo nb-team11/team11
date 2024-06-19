@@ -7,6 +7,8 @@ const mapApiSlice = createSlice({
     lng: '',
     user_lat: '',
     user_lng: '',
+    road: '',
+    bunji: '',
     distanceFromMe: 0
   },
 
@@ -31,8 +33,16 @@ const mapApiSlice = createSlice({
     },
     setDistanceFromMe: (state, action) => {
       state.distanceFromMe = action.payload;
+    },
+    setRoad: (state, action) => {
+      state.road = action.payload;
+    },
+
+    setBunji: (state, action) => {
+      state.bunji = action.payload;
     }
   }
 });
-export const { setLat, setLng, setUserLat, setUserLng, resetValue, setDistanceFromMe } = mapApiSlice.actions;
+export const { setLat, setLng, setUserLat, setUserLng, resetValue, setDistanceFromMe, setRoad, setBunji } =
+  mapApiSlice.actions;
 export default mapApiSlice.reducer;
