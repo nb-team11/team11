@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { getPost } from '../../../supabase/post.api';
 
 const StyledMainMapsContainer = styled.div`
   display: flex;
@@ -35,21 +36,37 @@ const StyledSubHeading = styled.h3`
   margin-left: 37px;
 `;
 
+const StyledSubContent = styled.p`
+  font-size: 15px;
+  color: #999;
+  margin-top: 15px;
+  margin-left: 20px;
+`;
+
 function MainMaps() {
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getPost(1);
+        setPosts(data);
+      } catch (error) {
+        console.error('Error fetching posts:', error);
+      }
+    };
+    fetchData();
+  });
+
   return (
     <StyledMainMapsContainer>
-      <StyledMapsBox>
-        <StyledMapPhoto />
-        <StyledSubHeading>내배캠 카페</StyledSubHeading>
-      </StyledMapsBox>
-      <StyledMapsBox>
-        <StyledMapPhoto />
-        <StyledSubHeading>내배캠 카페</StyledSubHeading>
-      </StyledMapsBox>
-      <StyledMapsBox>
-        <StyledMapPhoto />
-        <StyledSubHeading>내배캠 카페</StyledSubHeading>
-      </StyledMapsBox>
+      {posts.map((post) => (
+        <StyledMapsBox key={post.id}>
+          <StyledMapPhoto key={post.image} />
+          <StyledSubHeading>{post.title}</StyledSubHeading>
+          <StyledSubContent>{post.body}</StyledSubContent>
+        </StyledMapsBox>
+      ))}
     </StyledMainMapsContainer>
   );
 }
