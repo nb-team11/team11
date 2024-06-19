@@ -15,6 +15,7 @@ const AppRouter = () => {
           <Route path="mapapi" element={<MapApI />} />
           <Route path="/post-detail/:id" element={<DetailPage />} />
           <Route path="/UploadPost" element={<UploadPost />} />
+          <Route index element={<MainLocaton />} />
           {/* 여기에 추가해주시면 됩니당(LayOut은 navbaer와 footer예정) */}
         </Route>
       </Routes>
