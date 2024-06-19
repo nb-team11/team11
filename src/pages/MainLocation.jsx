@@ -1,14 +1,12 @@
 import React from 'react';
-import MainMapTitle from '../components/MainMapTitle';
-import MainMaps from '../components/MainMaps';
-import MainMapBox from '../components/MainMapBox';
+import MainMapTitle from '../components/MainPage/MainMapTitle';
+import MainMaps from '../components/MainPage/MainMaps';
 
 function MainLocaton() {
   return (
     <>
       <MainMapTitle />
       <MainMaps />
-      <MainMapBox />
     </>
   );
 }
