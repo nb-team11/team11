@@ -40,7 +40,7 @@ const StyledSubContent = styled.p`
   font-size: 15px;
   color: #999;
   margin-top: 15px;
-  margin-left: 20px;
+  margin-left: 2px;
 `;
 
 function MainMaps() {
@@ -62,7 +62,7 @@ function MainMaps() {
     <StyledMainMapsContainer>
       {posts.map((post) => (
         <StyledMapsBox key={post.id}>
-          <StyledMapPhoto key={post.image} />
+          <StyledMapPhoto />
           <StyledSubHeading>{post.title}</StyledSubHeading>
           <StyledSubContent>{post.body}</StyledSubContent>
         </StyledMapsBox>
