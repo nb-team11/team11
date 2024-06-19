@@ -22,6 +22,7 @@ import DeleteModal from '../DeleteModal/DeleteModal';
 import { useParams } from 'react-router-dom';
 import EditModal from '../EditModal/EditModal';
 import { checkLength } from './commentValidation';
+import SelectCategory from '../SelectCategory/SelectCategory';
 
 const PostComment = () => {
   const queryClient = useQueryClient();
@@ -123,7 +124,7 @@ const PostComment = () => {
             <StyledInput id="input-comment" type="text" value={comment} onChange={(e) => setComment(e.target.value)} />
             <StyledNotice ref={noticeRef3}>댓글을 입력해주세요.(100자 이내)</StyledNotice>
           </StyledCommentInputBox>
-          <StyledButton $marginTop="20" $width="100">
+          <StyledButton $marginTop="20" $width="100" $bgc="#605045" $bgcHover="#413228">
             보내기
           </StyledButton>
         </StyledCommentRegisterBox>
@@ -139,10 +140,15 @@ const PostComment = () => {
                   <StyledCommentContent>{comment.content}</StyledCommentContent>
                 </StyledCommentLeft>
                 <StyledCommentRight>
-                  <StyledButton $width="60" onClick={() => handleModiBtn(comment.id)}>
+                  <StyledButton
+                    $width="60"
+                    $bgc="#9b9b9b"
+                    $bgcHover="#898989"
+                    onClick={() => handleModiBtn(comment.id)}
+                  >
                     수정
                   </StyledButton>
-                  <StyledButton $width="60" onClick={() => handleDelBtn(comment.id)}>
+                  <StyledButton $width="60" $bgc="#9b9b9b" $bgcHover="#898989" onClick={() => handleDelBtn(comment.id)}>
                     삭제
                   </StyledButton>
                 </StyledCommentRight>
@@ -152,6 +158,7 @@ const PostComment = () => {
         </StyledCommentList>
         {editModalOpen && <EditModal setEditModalOpen={setEditModalOpen} commentId={commentId} />}
         {deleteModalOpen && <DeleteModal setDeleteModalOpen={setDeleteModalOpen} commentId={commentId} />}
+        <SelectCategory />
       </StyledCommentContainer>
     </>
   );

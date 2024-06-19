@@ -61,9 +61,9 @@ export const StyledButton = styled.button`
   font-size: 15px;
   font-weight: bold;
   color: white;
-  background-color: #605045;
+  background-color: ${(prop) => prop.$bgc};
   &:hover {
-    background-color: #413228;
+    background-color: ${(prop) => prop.$bgcHover};
     transition: 0.3s;
     cursor: pointer;
   }
