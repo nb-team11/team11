@@ -1,6 +1,14 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { StyleFormConatiner, StyleInput } from './StyledUpload.styled';
+import {
+  StyleFormConatiner,
+  StyleInput,
+  CancelButton,
+  DoneButton,
+  LargeInput,
+  StyledLabel,
+  InputRow
+} from './StyledUpload.styled';
 
 // 스타일 객체 정의
 const styles = {
@@ -69,19 +77,22 @@ const UploadPost = () => {
 
   const handleClick = () => {
     // 클릭했을때 타이틀 ... 객체로 만들기
-    console.log({ title });
+    console.log('DoneButton');
   };
   return (
     <StyleFormConatiner>
       <div style={{ display: 'flex' }}>
         <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
-          <label style={styles.label}>제목</label>
+          {/* <label style={styles.label}>제목</label> */}
+          <StyledLabel htmlFor="title">제목</StyledLabel>
+
           <StyleInput
             type="text"
-            // style={styles.input}
             placeholder="제목 입력"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
+            width="800px" // 너비를 800px로 설정
+            height="70px" // 높이를 70px로 설정
           />
         </div>
 
@@ -90,10 +101,11 @@ const UploadPost = () => {
             <label style={styles.label}>닉네임</label>
             <StyleInput
               type="text"
-              // style={styles.input}
               placeholder="닉네임 입력"
               value={nickname}
               onChange={(e) => setNickname(e.target.value)}
+              width="230px" // 너비를 800px로 설정
+              height="70px" // 높이를 70px로 설정
             />
           </div>
 
@@ -104,6 +116,8 @@ const UploadPost = () => {
               placeholder="비밀번호 입력"
               value={passwords}
               onChange={(e) => setPassword(e.target.value)}
+              width="230px" // 너비를 800px로 설정
+              height="70px" // 높이를 70px로 설정
             />
           </div>
         </div>
@@ -113,39 +127,52 @@ const UploadPost = () => {
         placeholder="함께하고 싶은 모임의 활동을 자세히 소개해 주세요. (30자 이상)"
         value={content}
         onChange={(e) => setContent(e.target.value)}
+        width="1300px" // 너비를 800px로 설정
+        height="150px" // 높이를 70px로 설정
       />
 
       <div style={{ display: 'flex' }}>
         <div style={{ display: 'flex', flexDirection: 'column' }}>
-          <label style={styles.label}>시간</label>
-          <StyleInput type="text" placeholder="시간" value={time} onChange={(e) => setTime(e.target.value)} />
+          {/* <label style={styles.label}>시간</label> */}
+          <StyledLabel htmlFor="time">시간</StyledLabel>
+          <StyleInput
+            type="text"
+            placeholder="시간"
+            value={time}
+            onChange={(e) => setTime(e.target.value)}
+            width="250px" // 너비를 800px로 설정
+            height="70px" // 높이를 70px로 설정
+          />
         </div>
 
         <div style={{ display: 'flex', marginLeft: '10px', flexDirection: 'column' }}>
-          <label style={styles.label}>인원</label>
+          {/* <label style={styles.label}>인원</label> */}
+          <StyledLabel htmlFor="participants">인원</StyledLabel>
           <StyleInput
             type="text"
             placeholder="인원"
             value={participants}
             onChange={(e) => setParticipants(e.target.value)}
+            width="250px" // 너비를 800px로 설정
+            height="70px" // 높이를 70px로 설정
           />
         </div>
 
         <div style={{ display: 'flex', marginLeft: '10px', flexDirection: 'column' }}>
           <label style={styles.label}>커버 이미지</label>
           <StyleInput
-            type="text"
+            type="file"
             placeholder="파일 선택"
             value={coverImage}
             onChange={(e) => setCoverImage(e.target.value)}
+            width="250px" // 너비를 800px로 설정
+            height="70px" // 높이를 70px로 설정
           />
         </div>
 
         <div style={{ marginLeft: 'auto', marginTop: 'auto' }}>
-          <button style={{ ...styles.button, ...styles.cancelButton }}>취소</button>
-          <button onClick={handleClick} style={{ ...styles.button, ...styles.doneButton }}>
-            완료
-          </button>
+          <CancelButton>취소</CancelButton>
+          <DoneButton onClick={handleClick}>완료</DoneButton>
         </div>
       </div>
 
