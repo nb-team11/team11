@@ -158,7 +158,6 @@ const PostComment = () => {
         </StyledCommentList>
         {editModalOpen && <EditModal setEditModalOpen={setEditModalOpen} commentId={commentId} />}
         {deleteModalOpen && <DeleteModal setDeleteModalOpen={setDeleteModalOpen} commentId={commentId} />}
-        <SelectCategory />
       </StyledCommentContainer>
     </>
   );
