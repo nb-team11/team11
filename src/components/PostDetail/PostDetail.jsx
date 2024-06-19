@@ -23,6 +23,7 @@ import {
 import { useQuery } from '@tanstack/react-query';
 import { getPost } from '../../../supabase/post.api';
 import { useParams } from 'react-router-dom';
+import MapApI from '../MapApi/MapApI';
 
 const PostDetail = () => {
   const { id } = useParams();
@@ -50,7 +51,8 @@ const PostDetail = () => {
         <StyledVisualInfo>
           <StyledPostImg src={matchedPost.image} />
           <StyledLocationBox>
-            <StyledLocationImg src="/public/vite.svg" />
+            {/* <StyledLocationImg src="/public/vite.svg" /> */}
+            <MapApI />
             <StyledContentBox>
               <StyledLocationName>내배캠카페</StyledLocationName>
               <StyledLocation>충청북도 청주시 청주길 12345</StyledLocation>

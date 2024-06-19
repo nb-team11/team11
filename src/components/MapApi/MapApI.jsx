@@ -99,18 +99,8 @@ const MapApI = () => {
     });
     infowindowRef.current = infowindow;
 
-    kakao.maps.event.addListener(map, 'click', function (mouseEvent) {
-      const latlng = mouseEvent.latLng;
-      marker.setPosition(latlng);
-
-      dispatch(setLat(latlng.getLat()));
-      dispatch(setLng(latlng.getLng()));
-
-      const distance = calculateDistance(user_lat, user_lng, latlng.getLat(), latlng.getLng());
-      const roundedDistance = distance.toFixed(2);
-      dispatch(setDistanceFromMe(roundedDistance));
-
-      convertCoordinatesToAddress(latlng.getLat(), latlng.getLng(), (roadAddress, bunjiAddress) => {
+    const updateInfowindow = (lat, lng) => {
+      convertCoordinatesToAddress(lat, lng, (roadAddress, bunjiAddress) => {
         const content = `<div class="bAddr">
                           <span class="title">주소정보</span>
                           <div>도로명주소 : ${roadAddress}</div>
@@ -122,6 +112,22 @@ const MapApI = () => {
         dispatch(setRoad(roadAddress));
         dispatch(setBunji(bunjiAddress));
       });
+    };
+
+    updateInfowindow(lat, lng); // 초기 위치에 대한 인포윈도우 정보 업데이트
+
+    kakao.maps.event.addListener(map, 'click', function (mouseEvent) {
+      const latlng = mouseEvent.latLng;
+      marker.setPosition(latlng);
+
+      dispatch(setLat(latlng.getLat()));
+      dispatch(setLng(latlng.getLng()));
+
+      const distance = calculateDistance(user_lat, user_lng, latlng.getLat(), latlng.getLng());
+      const roundedDistance = distance.toFixed(2);
+      dispatch(setDistanceFromMe(roundedDistance));
+
+      updateInfowindow(latlng.getLat(), latlng.getLng()); // 클릭한 위치에 대한 인포윈도우 정보 업데이트
     });
   };
 
@@ -160,7 +166,6 @@ const MapApI = () => {
     console.log('지번 주소:', bunji);
   }, [lat, lng, road, bunji]);
 
-  //DB부분 추후 작성시 변경하기(테이블명***************************************
   const handleGetLatLngFromDB = async () => {
     try {
       const { error } = await supabase.from('mapApi_test').insert([{ lat, lng, road, bunji }]);
@@ -175,7 +180,6 @@ const MapApI = () => {
     }
     dispatch(resetValue());
   };
-  //DB부분 추후 작성시 변경하기***************************************
 
   return (
     <>

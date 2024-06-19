@@ -45,6 +45,7 @@ export const Navbar = () => {
             onChange={(e) => setKeyword(e.target.value)}
           />
         </StyledInputDiv>
+        <StyledButton onClick={() => navigate('UploadPost')}>Post</StyledButton>
         <StyledButton onClick={() => navigate('/')}>Home</StyledButton>
       </StyledNavBarDiv>
       <StyledLogoDiv></StyledLogoDiv>

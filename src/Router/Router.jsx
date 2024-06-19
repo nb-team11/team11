@@ -11,6 +11,7 @@ const AppRouter = () => {
     <Router>
       <Routes>
         <Route path="/" element={<Layout />}>
+          <Route index element={<MainLocaton />} />
           <Route path="mapapi" element={<MapApI />} />
           <Route path="/post-detail/:id" element={<DetailPage />} />
           <Route path="/UploadPost" element={<UploadPost />} />
