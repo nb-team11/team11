@@ -8,7 +8,7 @@ import {
   LargeInput,
   StyledLabel,
   InputRow
-} from './StyledUpload.styled';
+} from './StyledUpload.js';
 
 // 스타일 객체 정의
 const styles = {
