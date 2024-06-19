@@ -23,7 +23,7 @@ const StyledMapsBox = styled.div`
 const StyledMapPhoto = styled.div`
   width: 400px;
   height: 250px;
-  background-color: #d9d9d9;
+  background-color: blue;
   margin: 0 auto;
   margin-top: 25px;
 `;
@@ -40,15 +40,7 @@ function MainMaps() {
     <StyledMainMapsContainer>
       <StyledMapsBox>
         <StyledMapPhoto />
-        <StyledSubHeading>내배캠 카페</StyledSubHeading>
-      </StyledMapsBox>
-      <StyledMapsBox>
-        <StyledMapPhoto />
-        <StyledSubHeading>내배캠 카페</StyledSubHeading>
-      </StyledMapsBox>
-      <StyledMapsBox>
-        <StyledMapPhoto />
-        <StyledSubHeading>내배캠 카페</StyledSubHeading>
+        <StyledSubHeading>내배캠 카페11</StyledSubHeading>
       </StyledMapsBox>
     </StyledMainMapsContainer>
   );

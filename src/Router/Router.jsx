@@ -4,12 +4,14 @@ import Layout from '../pages/Layout/Layout';
 import MapApI from './../components/MapApi/MapApI';
 import DetailPage from './../pages/DetailPage';
 import UploadPost from '../components/uploadpost/UploadPost';
+import MainLocaton from '../pages/MainLocation';
 
 const AppRouter = () => {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Layout />}>
+          <Route index element={<MainLocaton />} />
           <Route path="mapapi" element={<MapApI />} />
           <Route path="/post-detail/:id" element={<DetailPage />} />
           <Route path="/UploadPost" element={<UploadPost />} />

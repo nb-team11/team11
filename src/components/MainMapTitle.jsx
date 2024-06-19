@@ -1,46 +1,43 @@
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import styled from 'styled-components';
-
-const StyledSearchContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-const StyledSearchLocation = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 1500px;
-  height: 95px;
-  border-radius: 15px;
-  background-color: #d9d9d9;
-  margin-top: 25px;
-  padding: 0 20px;
-`;
-
-const StyledSearchIcon = styled.img`
-  width: 22px;
-  height: 22px;
-  margin-right: 10px;
-`;
-
-const StyledSearchTitle = styled.h2`
-  font-size: 22px;
-  margin-left: 10px;
-  margin-top: 5px;
-`;
+import { useDispatch, useSelector } from 'react-redux';
+import { StyledSearchContainer, StyledSearchIcon, StyledSearchLocation, StyledSearchTitle } from './Styled111';
+import { setUserPlace } from '../redux/mainTitleSlice';
+import { setUserLat, setUserLng } from '../redux/mapApiSlice';
 
 function MainMapTitle() {
   const dispatch = useDispatch();
+  const user_lat = useSelector((state) => state.titleSlice.user_lat);
+  const user_lng = useSelector((state) => state.titleSlice.user_lng);
+  const distanceFromMe = useSelector((state) => state.titleSlice.distanceFromMe);
+  const my_place = useSelector((state) => state.titleSlice.my_place);
+
+  const convertCoordinatesToAddress = (lat, lng, callback) => {
+    const geocoder = new kakao.maps.services.Geocoder();
+    const coord = new kakao.maps.LatLng(lat, lng);
+
+    geocoder.coord2Address(coord.getLng(), coord.getLat(), (result, status) => {
+      if (status === kakao.maps.services.Status.OK) {
+        const roadAddress = result[0].road_address ? result[0].road_address.address_name : '';
+        const bunjiAddress = result[0].address.address_name;
+        callback(roadAddress, bunjiAddress);
+      } else {
+        console.error('Failed to convert coordinates to address');
+      }
+    });
+  };
 
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
-          dispatch(setUserLat(position.coords.latitude));
-          dispatch(setUserLng(position.coords.longitude));
+          const { latitude, longitude } = position.coords;
+          dispatch(setUserLat(latitude));
+          dispatch(setUserLng(longitude));
+
+          convertCoordinatesToAddress(latitude, longitude, (roadAddress, bunjiAddress) => {
+            const fullAddress = roadAddress || bunjiAddress;
+            dispatch(setUserPlace(fullAddress));
+          });
         },
         (error) => {
           console.error('Error occurred. Error code: ' + error.code);
@@ -58,7 +55,7 @@ function MainMapTitle() {
     <StyledSearchContainer>
       <StyledSearchLocation>
         <StyledSearchIcon src="./free-icon-location-3865991.png" alt="위치아이콘" />
-        <StyledSearchTitle>OO시 소모임이 궁금하다면?</StyledSearchTitle>
+        <StyledSearchTitle>"{my_place.slice(0, my_place.indexOf('구') + 1)}"의 소모임이 궁금하다면?</StyledSearchTitle>
       </StyledSearchLocation>
     </StyledSearchContainer>
   );
