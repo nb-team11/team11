@@ -20,7 +20,7 @@ const StyledMainMapsContainer = styled.div`
 
 const StyledMapsBox = styled.div`
   width: 440px;
-  height: 400px;
+  height: 430px;
   border-radius: 15px;
   border: 1px solid #d9d9d9;
   box-sizing: border-box;
@@ -64,6 +64,14 @@ const StyledSubContent = styled.p`
   text-align: left;
 `;
 
+const StyledInformation = styled.p`
+  font-size: 14px;
+  color: #323232;
+  float: right;
+  margin-top: 15px;
+  margin-right: 20px;
+`;
+
 function MainMaps() {
   const [posts, setPosts] = useState([]);
   const navigate = useNavigate();
@@ -96,6 +104,9 @@ function MainMaps() {
               <StyledMapPhoto src={post.image} />
               <StyledSubHeading>{post.title}</StyledSubHeading>
               <StyledSubContent>{post.body}</StyledSubContent>
+              <StyledInformation>
+                {post.category} | {post.time}
+              </StyledInformation>
             </StyledMapsBox>
           ))}
       </StyledMainMapsContainer>
