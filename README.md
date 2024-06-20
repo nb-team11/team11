@@ -1,21 +1,21 @@
 # 🏘️ 동네 기반 소모임 SNS 플랫폼 <Town Talk>
 
-**저희 프로젝트 Town Talk는 본인이 원하는 카테고리의 소모임을 모집하는 글을 게시하면서 가까운 곳에 사는 다른 유저들과 소통도 하고, 직접 만남을 가지면서 즐거운 동네 생활을 경험할 수 있는 SNS 플랫폼을 목표로 제작되었습니다.**
+**저희 프로젝트 Town Talk는 본인이 위치한 동네와 일정거리 안의 모임을 찾아 원하는 카테고리의 소모임을 모집하는 글을 게시하면서 가까운 곳에 사는 다른 유저들과 소통도 하고, 직접 만남을 가지면서 즐거운 동네 생활을 경험할 수 있는 SNS 플랫폼을 목표로 제작되었습니다.**
 
 ---
+
 ## ⏳ 제작 기간
 
-- 24/06/17 ~ 24/06/21
+24/06/17 ~ 24/06/21
 
- ---
+---
 
 ## 기술 환경 및 스택
 
+<img src="https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB"/> <img src="https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white" /> <img src="https://img.shields.io/badge/-React%20Query-FF4154?style=for-the-badge&logo=react%20query&logoColor=white" /> <img src="https://img.shields.io/badge/redux-%23593d88.svg?style=for-the-badge&logo=redux&logoColor=white"/> <img src="https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white" /> <img src="https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white" />
 
-<img src="https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB"/>  <img src="https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white" />  <img src="https://img.shields.io/badge/-React%20Query-FF4154?style=for-the-badge&logo=react%20query&logoColor=white" /> <img src="https://img.shields.io/badge/redux-%23593d88.svg?style=for-the-badge&logo=redux&logoColor=white"/> <img src="https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white" /> <img src="https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white" /> 
+---
 
- ---
-  
 ## 🧑‍💻 역할 및 업무 분담
 
 - 김민수(팀장)
@@ -26,13 +26,13 @@
   - 메인 페이지 담당
 - 윤새라
   - 게시물 등록 페이지 담당
-  
+
 ---
 
 ## 📑 메인 페이지
 
 - 본인이 위치한 곳과, 그 위치에서 가까운 곳의 모임 정보들을 메인 화면에 노출
-- 최신순/거리순 별로 확인 가능한 정렬 버튼
+- 검색한 카테고리의 모임 정보들을 메인 화면에 노출
 
 ---
 
@@ -59,22 +59,30 @@
   - 게시물 상세 정보 페이지
 
 ---
+
 ## 부가 라이브러리
 
-
-<img src="https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white"/> 
-
-- kakao map API ??? 
+💅 styled components <br/>
+🌏 kakao map API
 
 ---
 
-# Trouble Shooting
+# 🥊 Trouble Shooting
 
- ## 문제 확인 : 게시물 상세 페이지에서 사용자가 댓글 수정 버튼을 클릭해도 수정이 되지 않는 오류 발생
-  1. 문제 재현을 위해 다시 수정 버튼을 클릭해보기
-  2. 어떤 에러가 발생했는지 확인하기 위해 브라우저 콘솔을 확인하기
-  3. 에러가 발생한 수정 버튼 클릭 이벤트 핸들러와 관련된 코드, supabase 서버 통신 함수 검토하기
-  4. 여러가지 가설을 설정: 클릭 이벤트가 발생한 댓글의 id를 넘겨주지 않은건지 / 요청이 제대로 전송되지 않은건지
-  5. 가설 검증하기: 이벤트핸들러 콘솔에 넘겨받은 commentId가 잘 출력되는지 확인하기 / 네트워크 탭 확인하기
-  6. 문제 해결: 출력은 잘 되나, 뮤테이션 함수의 인자로 commentId를 넘겨주었을 때 undefined로 전달되는 것을 확인하고 오류 수정
-  7. 유사한 문제가 발생하지 않도록 발생했던 문제와 해결방법에 대해 잘 기록해두기(e.g 코드리뷰)
+## 문제 확인 : 게시물 상세 페이지에서 사용자가 댓글 수정 버튼을 클릭해도 수정이 되지 않는 오류 발생
+
+1. 문제 재현을 위해 다시 수정 버튼을 클릭해보기
+2. 어떤 에러가 발생했는지 확인하기 위해 브라우저 콘솔을 확인하기
+3. 에러가 발생한 수정 버튼 클릭 이벤트 핸들러와 관련된 코드, supabase 서버 통신 함수 검토하기
+4. 여러가지 가설을 설정: 클릭 이벤트가 발생한 댓글의 id를 넘겨주지 않은건지 / 요청이 제대로 전송되지 않은건지
+5. 가설 검증하기: 이벤트핸들러 콘솔에 넘겨받은 commentId가 잘 출력되는지 확인하기 / 네트워크 탭 확인하기
+6. 문제 해결: 출력은 잘 되나, 뮤테이션 함수의 인자로 commentId를 넘겨주었을 때 undefined로 전달되는 것을 확인하고 오류 수정
+7. 유사한 문제가 발생하지 않도록 발생했던 문제와 해결방법에 대해 잘 기록해두기(e.g 코드리뷰)
+
+# 문제 확인 : "Uncaught Error: [Q] is not a <Route> component. All component children of <Routes> must be a <Route> or <React.Fragment>"
+
+1. 오류가 발생하는 페이지에 접속하여 문제 상황을 재현
+2. 콘솔에서 추가적인 오류 메시지를 확인하여 문제의 원인을 좀 더 명확히 파악합니다.
+3. 문제 해결 : '<Routes>' 내부의 모든 자식 컴포넌트를 확인하여 잘못 배치된 컴포넌트를 재배치 합니다.
+4. 수정한 페이지의 라우팅이 의도한 대로 정상적으로 작동하는지 테스트합니다.
+5. 코드리뷰 : 프로젝트 팀 내에서 코드리뷰를 하여 유사한 오류가 다른 부분에도 존재하지 않는 지 지 검토합니다.
