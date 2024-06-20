@@ -44,7 +44,6 @@ export const Navbar = () => {
         <StyledButton onClick={() => navigate('/upload')}>Post</StyledButton>
         <StyledButton onClick={() => navigate('/')}>Home</StyledButton>
       </StyledNavBarDiv>
-      <StyledLogoDiv></StyledLogoDiv>
     </>
   );
 };
