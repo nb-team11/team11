@@ -4,7 +4,7 @@ import { getPosts } from '../../../supabase/post.api';
 import { useNavigate } from 'react-router-dom';
 import { StyledLogoDiv } from '../Navbar/StyledNavbar';
 import MainMapTitle from './MainMapTitle';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setUserLat, setUserLng } from '../../redux/mapApiSlice';
 
 const StyledMainMapsContainer = styled.div`
@@ -77,6 +77,8 @@ function MainMaps() {
   const [userLocation, setUserLocation] = useState({ latitude: null, longitude: null });
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const keyword = useSelector((state) => state.postsSlice.keyword);
+  const postsData = useSelector((state) => state.postsSlice.postsData);
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -128,29 +130,53 @@ function MainMaps() {
       <MainMapTitle />
 
       <StyledMainMapsContainer>
-        {posts
-          .filter((post) => {
-            if (userLocation.latitude && userLocation.longitude && post.map_lat && post.map_lng) {
-              const distance = calculateDistance(
-                userLocation.latitude,
-                userLocation.longitude,
-                post.map_lat,
-                post.map_lng
-              );
-              return distance <= 20;
-            }
-            return false;
-          })
-          .map((post) => (
-            <StyledMapsBox onClick={() => navigate(`/post-detail/${post.id}`)} key={post.id}>
-              <StyledMapPhoto src={post.image} />
-              <StyledSubHeading>{post.title}</StyledSubHeading>
-              <StyledSubContent>{post.body}</StyledSubContent>
-              <StyledInformation>
-                {post.category} | {post.time}
-              </StyledInformation>
-            </StyledMapsBox>
-          ))}
+        {postsData.length == 0
+          ? posts
+              .filter((post) => {
+                if (userLocation.latitude && userLocation.longitude && post.map_lat && post.map_lng) {
+                  const distance = calculateDistance(
+                    userLocation.latitude,
+                    userLocation.longitude,
+                    post.map_lat,
+                    post.map_lng
+                  );
+                  return distance <= 20;
+                }
+                return false;
+              })
+              .map((post) => (
+                <StyledMapsBox onClick={() => navigate(`/post-detail/${post.id}`)} key={post.id}>
+                  <StyledMapPhoto src={post.image} />
+                  <StyledSubHeading>{post.title}</StyledSubHeading>
+                  <StyledSubContent>{post.body}</StyledSubContent>
+                  <StyledInformation>
+                    {post.category} | {post.time}
+                  </StyledInformation>
+                </StyledMapsBox>
+              ))
+          : postsData
+              .filter((post) => {
+                if (userLocation.latitude && userLocation.longitude && post.map_lat && post.map_lng) {
+                  const distance = calculateDistance(
+                    userLocation.latitude,
+                    userLocation.longitude,
+                    post.map_lat,
+                    post.map_lng
+                  );
+                  return distance <= 20;
+                }
+                return false;
+              })
+              .map((post) => (
+                <StyledMapsBox onClick={() => navigate(`/post-detail/${post.id}`)} key={post.id}>
+                  <StyledMapPhoto src={post.image} />
+                  <StyledSubHeading>{post.title}</StyledSubHeading>
+                  <StyledSubContent>{post.body}</StyledSubContent>
+                  <StyledInformation>
+                    {post.category} | {post.time}
+                  </StyledInformation>
+                </StyledMapsBox>
+              ))}
       </StyledMainMapsContainer>
     </>
   );

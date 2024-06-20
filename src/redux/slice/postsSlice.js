@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  postsData: []
+  postsData: [],
+  keyword: ''
 };
 
 const postsSlice = createSlice({
@@ -10,9 +11,12 @@ const postsSlice = createSlice({
   reducers: {
     uploadPostsData: (state, action) => {
       state.postsData = action.payload;
+    },
+    setKeyword: (state, action) => {
+      state.keyword = action.payload;
     }
   }
 });
 
-export const { uploadPostsData } = postsSlice.actions;
+export const { uploadPostsData, setKeyword } = postsSlice.actions;
 export default postsSlice.reducer;
