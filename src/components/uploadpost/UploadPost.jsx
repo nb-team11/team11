@@ -17,14 +17,7 @@ import {
 import { supabase } from '../../../supabase/supabase.js'; // supabase 사용하려면
 import SelectCategory from './../SelectCategory/SelectCategory';
 import { useDispatch, useSelector } from 'react-redux';
-// 스타일 객체 정의
-const styles = {};
-// UploadPost 컴포넌트 정의
 
-/**
- * 1. 게시물 작성 후 완료를 누르면
- * 2. 작성한 데이터와 위도 경도를 업로드 한다.
- */
 const UploadPost = () => {
   const [title, setTitle] = useState('');
   const [nickname, setNickname] = useState('');
@@ -33,80 +26,93 @@ const UploadPost = () => {
   const [time, setTime] = useState('');
   const [participants, setParticipants] = useState('');
   const [coverImage, setCoverImage] = useState('');
+  const [imageUrl, setImageUrl] = useState('');
 
   const category = useSelector((state) => state.UploadPostSlice.category);
   const lng = useSelector((state) => state.mapSlice.lng);
   const lat = useSelector((state) => state.mapSlice.lat);
-  //lat,lng useSelector이용
-  //
 
-  // navigate 함수 초기화
   const navigate = useNavigate();
 
-  const handleClickConfirm = () => {
-    // 클릭했을때 타이틀 ... 객체로 만들기
-    console.log('DoneButton');
-    console.log('제목', title);
-    console.log('닉네임', nickname);
-    console.log('비밀번호', passwords);
-    console.log('내용', content);
-    console.log('시간', time);
-    console.log('인원', participants);
-    console.log('이미지', coverImage);
-    // 1. writePost를 실행한다 ?
-    // 2. 서버로 어떤 값을 보내줘야 할까?
-    // 3.
+  const handleClickConfirm = async () => {
+    let imageUploadUrl = null;
 
-    //
+    if (coverImage) {
+      imageUploadUrl = await uploadImage(coverImage);
+      console.log('Uploaded image URL:', imageUploadUrl);
+    }
+
     const newObject = {
       time: time,
       title: title,
       head_count: participants,
       body: content,
-      image: null, // todo:image
       user_id: nickname,
       user_pw: passwords,
       category,
       map_lng: lng,
-      map_lat: lat
+      map_lat: lat,
+      image: imageUploadUrl // 이미지 URL을 설정합니다.
     };
+
     console.log(newObject);
-    writePost(newObject);
+    await writePost(newObject);
   };
 
-  // const testFunction = (data) => {
-  //   console.log(data)
-  // }
+  const uploadImage = async (file) => {
+    const fileName = `${Date.now()}`;
+    const filePath = `${fileName}`;
 
-  // const myText = '안녕하세요'
-  // testFunction(myText)
-  const writePost = async (newObject) => {
-    // 언제 실행 되어야 하는지 => 저장 버튼을 눌렀을 때
-    // posts 테이블에 등록
     try {
-      const { data, error } = await supabase
-        .from('posts_test') // supabase에 있는 테이블 이름
-        .insert(newObject);
+      const { data, error } = await supabase.storage.from('images').upload(filePath, file);
+
+      if (error) {
+        throw error;
+      }
+
+      const { data: urldata, error: publicURLError } = await supabase.storage.from('images').getPublicUrl(filePath);
+      if (publicURLError) {
+        throw publicURLError;
+      }
+
+      return urldata.publicUrl;
+    } catch (error) {
+      console.error('Error uploading image:', error);
+      toast.error('이미지 업로드에 실패했습니다.');
+      return null;
+    }
+  };
+
+  const writePost = async (newObject) => {
+    try {
+      const { data, error } = await supabase.from('posts_test').insert(newObject);
       if (error) {
         throw error;
       } else {
-        // 여기다가 작성 완료 되면 무엇을 해줄지
-        // 1.  토스트창 띄우기
-        // 2. 메인페이지로 이동
-        // 성공 메시지 토스트
         toast.success('글 작성이 완료되었습니다!', {
-          onClose: () => navigate('/'), // 메인 페이지로 이동
+          onClose: () => navigate('/'),
           autoClose: 700,
           hideProgressBar: true
         });
       }
     } catch (e) {
-      throw e;
+      console.error('Error writing post:', e);
+      toast.error('글 작성에 실패했습니다.');
     }
   };
 
   const handleClickCancel = () => {
     navigate(-1);
+  };
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setCoverImage(file);
+      const imageUrl = URL.createObjectURL(file);
+      setImageUrl(imageUrl);
+      console.log(imageUrl);
+    }
   };
 
   return (
@@ -119,58 +125,56 @@ const UploadPost = () => {
             placeholder="제목 입력"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            width="800px" // 너비를 800px로 설정
-            height="70px" // 높이를 70px로 설정
+            width="800px"
+            height="70px"
           />
         </div>
         <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
           <div style={{ display: 'flex', marginLeft: '10px', flexDirection: 'column' }}>
-            <label style={styles.label}>닉네임</label>
+            <label>닉네임</label>
             <StyleInput
               type="text"
               placeholder="닉네임 입력"
               value={nickname}
               onChange={(e) => setNickname(e.target.value)}
-              width="230px" // 너비를 800px로 설정
-              height="70px" // 높이를 70px로 설정
+              width="230px"
+              height="70px"
             />
           </div>
           <div style={{ display: 'flex', marginLeft: '10px', flexDirection: 'column' }}>
-            <label style={styles.label}>비밀번호</label>
+            <label>비밀번호</label>
             <StyleInput
               type="password"
               placeholder="비밀번호 입력"
               value={passwords}
               onChange={(e) => setPassword(e.target.value)}
-              width="230px" // 너비를 800px로 설정
-              height="70px" // 높이를 70px로 설정
+              width="230px"
+              height="70px"
             />
           </div>
         </div>
       </div>
-      <label style={styles.label}>내용</label>
+      <label>내용</label>
       <StyleInput
         placeholder="함께하고 싶은 모임의 활동을 자세히 소개해 주세요. (30자 이상)"
         value={content}
         onChange={(e) => setContent(e.target.value)}
-        width="1300px" // 너비를 800px로 설정
-        height="150px" // 높이를 70px로 설정
+        width="1300px"
+        height="150px"
       />
       <div style={{ display: 'flex' }}>
         <div style={{ display: 'flex', flexDirection: 'column' }}>
-          {/* <label style={styles.label}>시간</label> */}
           <StyledLabel htmlFor="time">시간</StyledLabel>
           <StyleInput
             type="date"
             placeholder="시간"
             value={time}
             onChange={(e) => setTime(e.target.value)}
-            width="250px" // 너비를 800px로 설정
-            height="70px" // 높이를 70px로 설정
+            width="250px"
+            height="70px"
           />
         </div>
         <div style={{ display: 'flex', marginLeft: '10px', flexDirection: 'column' }}>
-          {/* <label style={styles.label}>인원</label> */}
           <StyledLabel htmlFor="participants">인원</StyledLabel>
           <StyleInput
             type="text"
@@ -181,24 +185,17 @@ const UploadPost = () => {
             height="70px"
           />
         </div>
+
         <div style={{ display: 'flex', marginLeft: '10px', flexDirection: 'column' }}>
-          <label style={styles.label}>커버 이미지</label>
-          <StyleInput
-            type="file"
-            placeholder="파일 선택"
-            value={coverImage}
-            onChange={(e) => setCoverImage(e.target.value)}
-            width="250px"
-            height="70px"
-          />
+          <label>커버 이미지</label>
+          <StyleInput type="file" placeholder="파일 선택" onChange={handleImageChange} width="250px" height="70px" />
         </div>
+
         <div style={{ marginLeft: 'auto', marginTop: 'auto' }}>
           <CancelButton onClick={handleClickCancel}>취소</CancelButton>
           <DoneButton onClick={handleClickConfirm}>완료</DoneButton>
         </div>
       </div>
-      {/* <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-      </div> */}
       <SelectCategory />
     </StyleFormConatiner>
   );

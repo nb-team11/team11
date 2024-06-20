@@ -24,6 +24,15 @@ export const StyleInput = styled.input`
   height: ${(props) => props.height || 'auto'}; // 높이를 props에서 받거나 기본값 auto 사용
 `;
 
+export const StyledImagelabel = styled.label`
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 16px;
+  width: ${(props) => props.width || 'auto'}; // 너비를 props에서 받거나 기본값 auto 사용
+  height: ${(props) => props.height || 'auto'}; // 높이를 props에서 받거나 기본값 auto 사용
+`;
+
 // // 버튼기본 설정
 // // export const StyleButton = styled.button`
 // padding: 15px 20px;

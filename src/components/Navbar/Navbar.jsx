@@ -4,12 +4,12 @@ import { StyledButton, StyledInputDiv, StyledLogoDiv, StyledNavBarDiv, StyledTit
 import { useQuery } from '@tanstack/react-query';
 import { getPosts } from '../../../supabase/post.api';
 import { useDispatch, useSelector } from 'react-redux';
-import { uploadPostsData } from '../../redux/slice/postsSlice';
+import { setKeyword, uploadPostsData } from '../../redux/slice/postsSlice';
 
 export const Navbar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [keyword, setKeyword] = useState('');
+  const keyword = useSelector((state) => state.postsSlice.keyword);
   const postsData = useSelector((state) => state.postsSlice.postsData);
   console.log('1 =>', postsData);
 
@@ -22,7 +22,7 @@ export const Navbar = () => {
     e.preventDefault();
     const filteredPosts = posts.filter((post) => post.category === keyword);
     dispatch(uploadPostsData(filteredPosts));
-    setKeyword('');
+    dispatch(setKeyword(''));
   };
   console.log('2 =>', postsData);
 
@@ -38,7 +38,7 @@ export const Navbar = () => {
             id="searchTitle"
             placeholder="카테고리를 검색해보세요."
             value={keyword}
-            onChange={(e) => setKeyword(e.target.value)}
+            onChange={(e) => dispatch(setKeyword(e.target.value))}
           />
         </StyledInputDiv>
         <StyledButton onClick={() => navigate('/upload')}>Post</StyledButton>
