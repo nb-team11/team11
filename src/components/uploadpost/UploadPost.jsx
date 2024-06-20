@@ -15,6 +15,7 @@ import {
   InputRow
 } from './StyledUpload.js';
 import { supabase } from '../../../supabase/supabase.js'; // supabase 사용하려면
+import SelectCategory from './../SelectCategory/SelectCategory';
 // 스타일 객체 정의
 const styles = {};
 // UploadPost 컴포넌트 정의
@@ -186,4 +187,5 @@ const UploadPost = () => {
     </StyleFormConatiner>
   );
 };
+
 export default UploadPost;

@@ -5,7 +5,6 @@ import MainMaps from '../components/MainPage/MainMaps';
 function MainLocaton() {
   return (
     <>
-      <MainMapTitle />
       <MainMaps />
     </>
   );
