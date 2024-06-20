@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   resetValue,
@@ -14,7 +14,8 @@ import { StyledAddressDiv, StyledMapDiv } from './StyledMapApi';
 import { supabase } from '../../../supabase/supabase';
 import { useQuery } from '@tanstack/react-query';
 import { StyledLocation, StyledLocationName } from '../PostDetail/PostDetail.style';
-import { getPost } from '../../../supabase/post.api';
+import { useParams } from 'react-router-dom';
+import { getPosition } from '../../../supabase/post.api';
 
 const MapApI = () => {
   const dispatch = useDispatch();
@@ -26,23 +27,27 @@ const MapApI = () => {
   const road = useSelector((state) => state.mapSlice.road);
   const bunji = useSelector((state) => state.mapSlice.bunji);
 
-  const [posts, setPosts] = useState([]);
-
   const mapRef = useRef(null);
   const markerRef = useRef(null);
   const infowindowRef = useRef(null);
 
+  const { id } = useParams();
+  const { data } = useQuery({
+    queryKey: ['posts_test'],
+    queryFn: async () => {
+      const { data } = await supabase.from('posts_test').select('map_lat,map_lng').eq('id', id);
+      return data;
+    }
+  });
+
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await getPost();
-        setPosts(data);
-      } catch (error) {
-        console.error('Error fetching posts:', error);
-      }
-    };
-    fetchData();
-  }, []);
+    if (data && data.length > 0) {
+      const { map_lat, map_lng } = data[0];
+      dispatch(setLat(map_lat));
+      dispatch(setLng(map_lng));
+    }
+    console.log(data);
+  }, [data, dispatch]);
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -80,15 +85,18 @@ const MapApI = () => {
 
   const initializeMap = () => {
     const container = document.getElementById('map');
-    console.log({ user_lat, user_lng });
     const options = {
-      center: new kakao.maps.LatLng(posts.map_lat, posts.map_lng),
+      // 여기
+      // center: new kakao.maps.LatLng(lat, lng),
+      center: new kakao.maps.LatLng(lat, lng),
       level: 3
     };
     const map = new kakao.maps.Map(container, options);
     mapRef.current = map;
 
-    const markerPosition = new kakao.maps.LatLng(posts.map_lat, posts.map_lng);
+    // 여기
+    // const markerPosition = new kakao.maps.LatLng(lat, lng);
+    const markerPosition = new kakao.maps.LatLng(lat, lng);
     const marker = new kakao.maps.Marker({
       position: markerPosition
     });
@@ -115,7 +123,9 @@ const MapApI = () => {
       });
     };
 
-    updateInfowindow(lat, lng); // 초기 위치에 대한 인포윈도우 정보 업데이트
+    // 여기
+    // updateInfowindow(lat, lng); // 초기 위치에 대한 인포윈도우 정보 업데이트
+    updateInfowindow(user_lat, user_lng); // 초기 위치에 대한 인포윈도우 정보 업데이트
 
     kakao.maps.event.addListener(map, 'click', function (mouseEvent) {
       const latlng = mouseEvent.latLng;
@@ -158,7 +168,7 @@ const MapApI = () => {
   };
 
   useEffect(() => {
-    // console.log('데이터값:', data);
+    console.log('데이터값:', data);
     // console.log('현재 위도:', lat);
     // console.log('현재 경도:', lng);
     // console.log('유저위치:', user_lat, user_lng);
