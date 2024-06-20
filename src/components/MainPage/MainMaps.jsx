@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { getPosts } from '../../../supabase/post.api';
 import { useNavigate } from 'react-router-dom';
+import { StyledLogoDiv } from '../Navbar/StyledNavbar';
+import MainMapTitle from './MainMapTitle';
 
 const StyledMainMapsContainer = styled.div`
   display: flex;
@@ -76,15 +78,20 @@ function MainMaps() {
   }, []);
 
   return (
-    <StyledMainMapsContainer>
-      {posts.map((post) => (
-        <StyledMapsBox onClick={() => navigate(`/post-detail/${post.id}`)} key={post.id}>
-          <StyledMapPhoto src={post.image} />
-          <StyledSubHeading>{post.title}</StyledSubHeading>
-          <StyledSubContent>{post.body}</StyledSubContent>
-        </StyledMapsBox>
-      ))}
-    </StyledMainMapsContainer>
+    <>
+      <StyledLogoDiv></StyledLogoDiv>
+      <MainMapTitle />
+
+      <StyledMainMapsContainer>
+        {posts.map((post) => (
+          <StyledMapsBox onClick={() => navigate(`/post-detail/${post.id}`)} key={post.id}>
+            <StyledMapPhoto src={post.image} />
+            <StyledSubHeading>{post.title}</StyledSubHeading>
+            <StyledSubContent>{post.body}</StyledSubContent>
+          </StyledMapsBox>
+        ))}
+      </StyledMainMapsContainer>
+    </>
   );
 }
 
