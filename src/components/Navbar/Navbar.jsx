@@ -18,10 +18,6 @@ export const Navbar = () => {
   if (isPending) return <>로딩중입니다~</>;
   if (isError) return <>게시물 데이터 조회 중 오류가 발생했습니다!</>;
 
-  // 받아온 데이터 가공해서(키워드랑 일치하는 데이터만) 전역상태로 관리
-  // main에 뿌려주기 <- 요거는 메인페이지에서 구현
-  // ... 상태 길이가 0이면 서버에서 가져온 데이터로 뿌려주고 아니면 전역에서 데이터 가져와서 뿌리기
-
   const handleSubmitKeyword = (e) => {
     e.preventDefault();
     const filteredPosts = posts.filter((post) => post.category === keyword);

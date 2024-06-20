@@ -8,6 +8,10 @@ import {
   StyledVisualInfo,
   StyledPostImg,
   StyledLocationBox,
+  StyledLocationImg,
+  StyledLocationName,
+  StyledLocation,
+  StyledContentBox,
   StyledPostContentBox,
   StyledContentTop,
   StyleContentText,
@@ -24,7 +28,6 @@ import MapApI from '../MapApi/MapApI';
 const PostDetail = () => {
   const { id } = useParams();
   const { data: post, isPending, isError } = useQuery({ queryKey: ['post'], queryFn: () => getPost(id) });
-  // custom hook으로 만들면 관리하기 편함
 
   if (isPending) {
     return <h1>로딩중입니다~</h1>;
@@ -44,12 +47,15 @@ const PostDetail = () => {
           <StyledPostTitle>{matchedPost.title}</StyledPostTitle>
           <StyledPostCreatedAt>{matchedPost.created_at.slice(0, 10)}</StyledPostCreatedAt>
         </StyledTitleBox>
-
         <StyledVisualInfo>
           <StyledPostImg src={matchedPost.image} />
           <StyledLocationBox>
+            {/* <StyledLocationImg src="/public/vite.svg" /> */}
             <MapApI />
-            {/* 맵api출력 */}
+            <StyledContentBox>
+              <StyledLocationName>내배캠카페</StyledLocationName>
+              <StyledLocation>충청북도 청주시 청주길 12345</StyledLocation>
+            </StyledContentBox>
           </StyledLocationBox>
         </StyledVisualInfo>
         <StyledPostContentBox>
