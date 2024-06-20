@@ -18,7 +18,7 @@ export const StyledTitleBox = styled.div`
   justify-content: space-between;
   align-items: center;
   border-radius: 15px;
-  //box-shadow: 0px 1px 7px #b9b9b9;
+  margin-top: 20px;
 `;
 
 export const StyledPostNickname = styled.p`
