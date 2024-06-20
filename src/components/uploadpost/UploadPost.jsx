@@ -20,6 +20,11 @@ import { useDispatch, useSelector } from 'react-redux';
 // 스타일 객체 정의
 const styles = {};
 // UploadPost 컴포넌트 정의
+
+/**
+ * 1. 게시물 작성 후 완료를 누르면
+ * 2. 작성한 데이터와 위도 경도를 업로드 한다.
+ */
 const UploadPost = () => {
   const [title, setTitle] = useState('');
   const [nickname, setNickname] = useState('');
