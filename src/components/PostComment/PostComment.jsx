@@ -63,7 +63,6 @@ const PostComment = () => {
       content: comment,
       post_id: id
     };
-    // 유효성 검사 추가
 
     if (!checkLength(nickname, 4, 8)) {
       noticeRef1.current.style.display = 'block';

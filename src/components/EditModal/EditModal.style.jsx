@@ -5,6 +5,7 @@ export const StyleBackGround = styled.div`
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
   position: fixed;
+  z-index: 10;
   top: 0;
   left: 0;
   display: flex;
