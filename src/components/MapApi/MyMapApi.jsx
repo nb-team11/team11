@@ -83,13 +83,17 @@ const MapApI = () => {
     const container = document.getElementById('map');
     console.log({ user_lat, user_lng });
     const options = {
-      center: new kakao.maps.LatLng(lat, lng),
+      // 여기
+      // center: new kakao.maps.LatLng(lat, lng),
+      center: new kakao.maps.LatLng(user_lat, user_lng),
       level: 3
     };
     const map = new kakao.maps.Map(container, options);
     mapRef.current = map;
 
-    const markerPosition = new kakao.maps.LatLng(lat, lng);
+    // 여기
+    // const markerPosition = new kakao.maps.LatLng(lat, lng);
+    const markerPosition = new kakao.maps.LatLng(user_lat, user_lng);
     const marker = new kakao.maps.Marker({
       position: markerPosition
     });
@@ -116,7 +120,9 @@ const MapApI = () => {
       });
     };
 
-    updateInfowindow(lat, lng); // 초기 위치에 대한 인포윈도우 정보 업데이트
+    // 여기
+    // updateInfowindow(lat, lng); // 초기 위치에 대한 인포윈도우 정보 업데이트
+    updateInfowindow(user_lat, user_lng); // 초기 위치에 대한 인포윈도우 정보 업데이트
 
     kakao.maps.event.addListener(map, 'click', function (mouseEvent) {
       const latlng = mouseEvent.latLng;
