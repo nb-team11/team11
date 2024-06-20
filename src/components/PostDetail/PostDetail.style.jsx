@@ -18,7 +18,7 @@ export const StyledTitleBox = styled.div`
   justify-content: space-between;
   align-items: center;
   border-radius: 15px;
-  //box-shadow: 0px 1px 7px #b9b9b9;
+  margin-top: 20px;
 `;
 
 export const StyledPostNickname = styled.p`
@@ -77,7 +77,7 @@ export const StyledLocationBox = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 30px;
+  gap: 15px;
 `;
 
 export const StyledLocationImg = styled.img`

@@ -58,7 +58,7 @@ const EditModal = ({ setEditModalOpen, commentId }) => {
           <StyleEditTitle>댓글 수정하기</StyleEditTitle>
           <StyleInputBox>
             <StyleLabel>비밀번호</StyleLabel>
-            <StyleInput placeholder="비밀번호를 입력하세요." ref={refPassword} />
+            <StyleInput type="password" placeholder="비밀번호를 입력하세요." ref={refPassword} />
           </StyleInputBox>
           <StyleInputBox>
             <StyleLabel>댓글</StyleLabel>

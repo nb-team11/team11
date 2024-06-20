@@ -54,6 +54,7 @@ const DeleteModal = ({ setDeleteModalOpen, commentId }) => {
           <StyleDeleteMent>댓글은 영구적으로 삭제되며, 복원할 수 없습니다.</StyleDeleteMent>
           <StyleInput
             placeholder="비밀번호를 입력하세요."
+            type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
