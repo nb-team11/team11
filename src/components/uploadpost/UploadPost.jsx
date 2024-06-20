@@ -185,7 +185,5 @@ const UploadPost = () => {
       </div> */}
     </StyleFormConatiner>
   );
-    </StyleFormConatiner>
-  );
 };
 export default UploadPost;
