@@ -35,7 +35,8 @@ const UploadPost = () => {
   const [coverImage, setCoverImage] = useState('');
 
   const category = useSelector((state) => state.UploadPostSlice.category);
-
+  const lng = useSelector((state) => state.mapSlice.lng);
+  const lat = useSelector((state) => state.mapSlice.lat);
   //lat,lng useSelector이용
   //
 
@@ -65,7 +66,9 @@ const UploadPost = () => {
       image: null, // todo:image
       user_id: nickname,
       user_pw: passwords,
-      category
+      category,
+      map_lng: lng,
+      map_lat: lat
     };
     console.log(newObject);
     writePost(newObject);
@@ -93,7 +96,7 @@ const UploadPost = () => {
         // 성공 메시지 토스트
         toast.success('글 작성이 완료되었습니다!', {
           onClose: () => navigate('/'), // 메인 페이지로 이동
-          autoClose: 1000,
+          autoClose: 700,
           hideProgressBar: true
         });
       }
@@ -103,7 +106,7 @@ const UploadPost = () => {
   };
 
   const handleClickCancel = () => {
-    console.log('취소버튼 눌림');
+    navigate(-1);
   };
 
   return (

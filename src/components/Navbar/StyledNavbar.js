@@ -68,4 +68,5 @@ export const StyledLogoDiv = styled.div`
   background-image: url('/public/towntalk_banner.png') !important;
   background-repeat: no-repeat;
   height: 450px;
+  background-size: cover;
 `;
