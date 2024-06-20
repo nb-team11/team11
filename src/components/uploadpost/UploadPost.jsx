@@ -16,9 +16,16 @@ import {
 } from './StyledUpload.js';
 import { supabase } from '../../../supabase/supabase.js'; // supabase 사용하려면
 import SelectCategory from './../SelectCategory/SelectCategory';
+import { useSelector } from 'react-redux';
+
 // 스타일 객체 정의
 const styles = {};
 // UploadPost 컴포넌트 정의
+
+/**
+ * 1. 게시물 작성 후 완료를 누르면
+ * 2. 작성한 데이터와 위도 경도를 업로드 한다.
+ */
 const UploadPost = () => {
   const [title, setTitle] = useState('');
   const [nickname, setNickname] = useState('');
@@ -27,6 +34,11 @@ const UploadPost = () => {
   const [time, setTime] = useState('');
   const [participants, setParticipants] = useState('');
   const [coverImage, setCoverImage] = useState('');
+
+  const category = useSelector((state) => state.UploadPostSlice.category);
+  // rtk에서 저장된 데이터를 가져오는 코드 - useSelector() 로 가져옴
+  const lng = useSelector((state) => state.mapSlice.lng);
+  const lat = useSelector((state) => state.mapSlice.lat);
 
   // navigate 함수 초기화
   const navigate = useNavigate();
@@ -53,7 +65,10 @@ const UploadPost = () => {
       body: content,
       image: null, // todo:image
       user_id: nickname,
-      user_pw: passwords
+      user_pw: passwords,
+      category,
+      map_lng: lng,
+      map_lat: lat
     };
     console.log(newObject);
     writePost(newObject);

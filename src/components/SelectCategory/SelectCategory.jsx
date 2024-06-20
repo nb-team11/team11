@@ -9,7 +9,7 @@ import {
 } from './SelectCategory.style';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCategory } from '../../redux/UploadPostSlice';
-import MapApI from './../MapApi/MapApI';
+import MyMapApi from './../MapApi/MyMapApi';
 
 const SelectCategory = () => {
   // 상위에서 category state 만들어서 props로 전달하는 방식으로 변경하기
@@ -26,7 +26,9 @@ const SelectCategory = () => {
   return (
     <StyledCategoryAndMapApi>
       <StyledMapContainer>
-        <MapApI />
+        {/* 여기 */}
+        {/* <MapApI /> */}
+        <MyMapApi />
       </StyledMapContainer>
       <StyledContainer>
         <StyledTitle>만들고 싶은 모임을 선택해주세요.</StyledTitle>
