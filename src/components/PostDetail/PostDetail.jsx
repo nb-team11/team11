@@ -52,10 +52,10 @@ const PostDetail = () => {
           <StyledLocationBox>
             {/* <StyledLocationImg src="/public/vite.svg" /> */}
             <MapApI />
-            <StyledContentBox>
+            {/* <StyledContentBox>
               <StyledLocationName>내배캠카페</StyledLocationName>
               <StyledLocation>충청북도 청주시 청주길 12345</StyledLocation>
-            </StyledContentBox>
+            </StyledContentBox> */}
           </StyledLocationBox>
         </StyledVisualInfo>
         <StyledPostContentBox>
