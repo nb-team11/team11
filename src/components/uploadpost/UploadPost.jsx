@@ -16,8 +16,7 @@ import {
 } from './StyledUpload.js';
 import { supabase } from '../../../supabase/supabase.js'; // supabase 사용하려면
 import SelectCategory from './../SelectCategory/SelectCategory';
-import { useSelector } from 'react-redux';
-
+import { useDispatch, useSelector } from 'react-redux';
 // 스타일 객체 정의
 const styles = {};
 // UploadPost 컴포넌트 정의
@@ -36,9 +35,9 @@ const UploadPost = () => {
   const [coverImage, setCoverImage] = useState('');
 
   const category = useSelector((state) => state.UploadPostSlice.category);
-  // rtk에서 저장된 데이터를 가져오는 코드 - useSelector() 로 가져옴
-  const lng = useSelector((state) => state.mapSlice.lng);
-  const lat = useSelector((state) => state.mapSlice.lat);
+
+  //lat,lng useSelector이용
+  //
 
   // navigate 함수 초기화
   const navigate = useNavigate();
@@ -66,9 +65,7 @@ const UploadPost = () => {
       image: null, // todo:image
       user_id: nickname,
       user_pw: passwords,
-      category,
-      map_lng: lng,
-      map_lat: lat
+      category
     };
     console.log(newObject);
     writePost(newObject);
