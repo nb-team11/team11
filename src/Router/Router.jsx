@@ -5,10 +5,13 @@ import MapApI from './../components/MapApi/MapApI';
 import DetailPage from './../pages/DetailPage';
 import UploadPost from '../components/uploadpost/UploadPost';
 import MainLocaton from '../pages/MainLocation';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AppRouter = () => {
   return (
     <Router>
+      <ToastContainer />
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<MainLocaton />} />
