@@ -10,9 +10,10 @@ import {
   setUserLat,
   setUserLng
 } from '../../redux/mapApiSlice';
-import { StyledMapDiv } from './StyledMapApi';
+import { StyledAddressDiv, StyledMapDiv } from './StyledMapApi';
 import { supabase } from '../../../supabase/supabase';
 import { useQuery } from '@tanstack/react-query';
+import { StyledLocation, StyledLocationName } from '../PostDetail/PostDetail.style';
 
 const MapApI = () => {
   const dispatch = useDispatch();
@@ -166,30 +167,14 @@ const MapApI = () => {
     console.log('지번 주소:', bunji);
   }, [lat, lng, road, bunji]);
 
-  const handleGetLatLngFromDB = async () => {
-    try {
-      const { error } = await supabase.from('mapApi_test').insert([{ lat, lng, road, bunji }]);
-
-      if (error) {
-        throw error;
-      } else {
-        console.log('데이터가 성공적으로 삽입되었습니다.');
-      }
-    } catch (error) {
-      console.error('오류 발생:', error.message);
-    }
-    dispatch(resetValue());
-  };
-
   return (
     <>
       <StyledMapDiv id="map"></StyledMapDiv>
-      <button onClick={handleGetLatLngFromDB}>테스트</button>
-      <div>
-        <h3>주소 정보</h3>
-        <p>도로명 주소: {road}</p>
-        <p>지번 주소: {bunji}</p>
-      </div>
+      <StyledAddressDiv>
+        <StyledLocationName>주소 정보</StyledLocationName>
+        <StyledLocation>도로명 주소: {road}</StyledLocation>
+        <StyledLocation>지번 주소: {bunji}</StyledLocation>
+      </StyledAddressDiv>
     </>
   );
 };
