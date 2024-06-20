@@ -45,14 +45,12 @@ const PostDetail = () => {
           <StyledPostCreatedAt>{matchedPost.created_at.slice(0, 10)}</StyledPostCreatedAt>
         </StyledTitleBox>
 
-        {/* ㅇㅇㅇㅇ */}
         <StyledVisualInfo>
           <StyledPostImg src={matchedPost.image} />
           <StyledLocationBox>
             <MapApI />
             {/* 맵api출력 */}
           </StyledLocationBox>
-          {/* ㅇㅇㅇㅇ */}
         </StyledVisualInfo>
         <StyledPostContentBox>
           <StyledContentTop>
