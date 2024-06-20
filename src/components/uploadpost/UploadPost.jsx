@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from 'react-router-dom';
+
 import {
   StyleFormConatiner,
   StyleInput,
@@ -10,8 +15,7 @@ import {
   InputRow
 } from './StyledUpload.js';
 import { supabase } from '../../../supabase/supabase.js'; // supabase 사용하려면
-import SelectCategory from '../SelectCategory/SelectCategory.jsx';
-import MapApI from './../MapApi/MapApI';
+import SelectCategory from './../SelectCategory/SelectCategory';
 // 스타일 객체 정의
 const styles = {};
 // UploadPost 컴포넌트 정의
@@ -24,10 +28,9 @@ const UploadPost = () => {
   const [participants, setParticipants] = useState('');
   const [coverImage, setCoverImage] = useState('');
 
-  // onCLick이란 ? 6/19 18:28 윤새라 수강생님 복습한다고 선언
-  // onChange란 ? 6/19 18:28 윤새라 수강생님 복습한다고 선언
-  // onCLick이란 ? 6/19 18:28 윤새라 수강생님 복습한다고 선언
-  // onChange란 ? 6/19 18:28 윤새라 수강생님 복습한다고 선언
+  // navigate 함수 초기화
+  const navigate = useNavigate();
+
   const handleClickConfirm = () => {
     // 클릭했을때 타이틀 ... 객체로 만들기
     console.log('DoneButton');
@@ -38,6 +41,10 @@ const UploadPost = () => {
     console.log('시간', time);
     console.log('인원', participants);
     console.log('이미지', coverImage);
+    // 1. writePost를 실행한다 ?
+    // 2. 서버로 어떤 값을 보내줘야 할까?
+    // 3.
+
     //
     const newObject = {
       time: time,
@@ -49,21 +56,44 @@ const UploadPost = () => {
       user_pw: passwords
     };
     console.log(newObject);
+    writePost(newObject);
   };
-  // 복습은 언 제 하 실 꺼 죠 ?
-  // 복습은 언 제 하 실 꺼 죠 ?
-  const uploadPost = async () => {
+
+  // const testFunction = (data) => {
+  //   console.log(data)
+  // }
+
+  // const myText = '안녕하세요'
+  // testFunction(myText)
+  const writePost = async (newObject) => {
+    // 언제 실행 되어야 하는지 => 저장 버튼을 눌렀을 때
     // posts 테이블에 등록
-    const { data, error } = await supabase
-      .from('testsets') // supabase에 있는 테이블 이름
-      .insert([{ user_id: userId, nickname, title, content, image, views: 0, rating }]);
-    if (error) {
-      throw error;
+    try {
+      const { data, error } = await supabase
+        .from('posts_test') // supabase에 있는 테이블 이름
+        .insert(newObject);
+      if (error) {
+        throw error;
+      } else {
+        // 여기다가 작성 완료 되면 무엇을 해줄지
+        // 1.  토스트창 띄우기
+        // 2. 메인페이지로 이동
+        // 성공 메시지 토스트
+        toast.success('글 작성이 완료되었습니다!', {
+          onClose: () => navigate('/'), // 메인 페이지로 이동
+          autoClose: 1000,
+          hideProgressBar: true
+        });
+      }
+    } catch (e) {
+      throw e;
     }
   };
+
   const handleClickCancel = () => {
     console.log('취소버튼 눌림');
   };
+
   return (
     <StyleFormConatiner>
       <div style={{ display: 'flex' }}>
@@ -158,4 +188,5 @@ const UploadPost = () => {
     </StyleFormConatiner>
   );
 };
+
 export default UploadPost;
