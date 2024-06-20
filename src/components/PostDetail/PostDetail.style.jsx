@@ -98,11 +98,13 @@ export const StyledContentBox = styled.div`
 
 export const StyledLocationName = styled.p`
   font-size: 20px;
+  margin-left: 16px;
 `;
 
 export const StyledLocation = styled.p`
   font-size: 16px;
   margin-top: 10px;
+  margin-left: 16px;
 `;
 
 export const StyledPostContentBox = styled.div`
