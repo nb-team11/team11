@@ -1,7 +1,10 @@
 import styled from 'styled-components';
 
 export const StyledMapDiv = styled.div`
-  width: 500px;
-  height: 400px;
-  border: 1px solid red;
+  width: 95%;
+  height: 70%;
+`;
+
+export const StyledAddressDiv = styled.div`
+  margin-right: 400px;
 `;

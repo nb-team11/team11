@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { StyledSearchContainer, StyledSearchIcon, StyledSearchLocation, StyledSearchTitle } from './Styled111';
+import { StyledSearchContainer, StyledSearchIcon, StyledSearchLocation, StyledSearchTitle } from './StyledMapTitle';
 import { setUserLat, setUserLng } from '../../redux/mapApiSlice';
 import { setUserPlace } from '../../redux/mainTitleSlice';
 
@@ -24,6 +24,18 @@ function MainMapTitle() {
         console.error('Failed to convert coordinates to address');
       }
     });
+  };
+
+  const getFormattedPlace = (place) => {
+    let formattedPlace = '';
+    if (place.includes('시')) {
+      formattedPlace = place.slice(0, place.indexOf('시') + 1);
+    } else if (place.includes('군')) {
+      formattedPlace = place.slice(0, place.indexOf('군') + 1);
+    } else {
+      formattedPlace = place; // "시"나 "군"이 없는 경우 전체 문자열 사용
+    }
+    return formattedPlace;
   };
 
   useEffect(() => {
@@ -55,7 +67,7 @@ function MainMapTitle() {
     <StyledSearchContainer>
       <StyledSearchLocation>
         <StyledSearchIcon src="./free-icon-location-3865991.png" alt="위치아이콘" />
-        <StyledSearchTitle>"{my_place.slice(0, my_place.indexOf('구') + 1)}"의 소모임이 궁금하다면?</StyledSearchTitle>
+        <StyledSearchTitle>"{getFormattedPlace(my_place)}"의 소모임이 궁금하다면?</StyledSearchTitle>
       </StyledSearchLocation>
     </StyledSearchContainer>
   );
