@@ -5,7 +5,7 @@ import MapApI from './../components/MapApi/MapApI';
 import DetailPage from './../pages/DetailPage';
 import MainLocaton from '../pages/MainLocation';
 import UploadPost from '../components/uploadpost/UploadPost';
-import MainLocaton from '../pages/MainLocation';
+
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
