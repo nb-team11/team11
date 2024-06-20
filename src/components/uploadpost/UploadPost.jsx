@@ -10,6 +10,8 @@ import {
   InputRow
 } from './StyledUpload.js';
 import { supabase } from '../../../supabase/supabase.js'; // supabase 사용하려면
+import SelectCategory from '../SelectCategory/SelectCategory.jsx';
+import MapApI from './../MapApi/MapApI';
 // 스타일 객체 정의
 const styles = {};
 // UploadPost 컴포넌트 정의
@@ -21,6 +23,7 @@ const UploadPost = () => {
   const [time, setTime] = useState('');
   const [participants, setParticipants] = useState('');
   const [coverImage, setCoverImage] = useState('');
+
   // onCLick이란 ? 6/19 18:28 윤새라 수강생님 복습한다고 선언
   // onChange란 ? 6/19 18:28 윤새라 수강생님 복습한다고 선언
   // onCLick이란 ? 6/19 18:28 윤새라 수강생님 복습한다고 선언
@@ -151,6 +154,7 @@ const UploadPost = () => {
       </div>
       {/* <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
       </div> */}
+      <SelectCategory />
     </StyleFormConatiner>
   );
 };

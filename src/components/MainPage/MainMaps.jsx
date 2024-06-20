@@ -8,7 +8,7 @@ import MainMapTitle from './MainMapTitle';
 const StyledMainMapsContainer = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   margin: 20px auto;
   margin-top: 25px;
   width: 1500px;
@@ -29,6 +29,7 @@ const StyledMapsBox = styled.div`
   transition: all 0.5s;
   cursor: pointer;
   flex: 0 1 30%;
+  margin: 24px;
 
   &:hover {
     box-shadow: 0px 1px 5px #b9b9b9;
@@ -83,13 +84,15 @@ function MainMaps() {
       <MainMapTitle />
 
       <StyledMainMapsContainer>
-        {posts.map((post) => (
-          <StyledMapsBox onClick={() => navigate(`/post-detail/${post.id}`)} key={post.id}>
-            <StyledMapPhoto src={post.image} />
-            <StyledSubHeading>{post.title}</StyledSubHeading>
-            <StyledSubContent>{post.body}</StyledSubContent>
-          </StyledMapsBox>
-        ))}
+        {posts
+          .filter((post) => post.distance == null || post.distance <= 15)
+          .map((post) => (
+            <StyledMapsBox onClick={() => navigate(`/post-detail/${post.id}`)} key={post.id}>
+              <StyledMapPhoto src={post.image} />
+              <StyledSubHeading>{post.title}</StyledSubHeading>
+              <StyledSubContent>{post.body}</StyledSubContent>
+            </StyledMapsBox>
+          ))}
       </StyledMainMapsContainer>
     </>
   );

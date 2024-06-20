@@ -1,7 +1,16 @@
 import styled from 'styled-components';
 
+export const StyledMapContainer = styled.div`
+  width: 800px;
+  height: 500px;
+  margin-top: 130px;
+`;
+export const StyledCategoryAndMapApi = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
 export const StyledContainer = styled.div`
-  width: 630px;
+  width: auto;
   height: 685px;
   gap: 20px;
   //background-color: #449443;
@@ -14,15 +23,15 @@ export const StyledContainer = styled.div`
 export const StyledTitle = styled.h1`
   width: 630px;
   height: 85px;
-  font-size: 30px;
+  font-size: 24px;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
 export const StyledCategoryBox = styled.div`
-  width: 520px;
-  height: 520px;
+  width: 420px;
+  height: 420px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -32,8 +41,8 @@ export const StyledCategoryBox = styled.div`
 `;
 
 export const StyledCategory = styled.button`
-  width: 150px;
-  height: 150px;
+  width: 120px;
+  height: 120px;
   display: flex;
   justify-content: center;
   align-items: center;
