@@ -16,6 +16,7 @@ import {
 } from './StyledUpload.js';
 import { supabase } from '../../../supabase/supabase.js'; // supabase 사용하려면
 import SelectCategory from './../SelectCategory/SelectCategory';
+import { useDispatch, useSelector } from 'react-redux';
 // 스타일 객체 정의
 const styles = {};
 // UploadPost 컴포넌트 정의
@@ -27,6 +28,11 @@ const UploadPost = () => {
   const [time, setTime] = useState('');
   const [participants, setParticipants] = useState('');
   const [coverImage, setCoverImage] = useState('');
+
+  const category = useSelector((state) => state.UploadPostSlice.category);
+
+  //lat,lng useSelector이용
+  //
 
   // navigate 함수 초기화
   const navigate = useNavigate();
@@ -53,7 +59,8 @@ const UploadPost = () => {
       body: content,
       image: null, // todo:image
       user_id: nickname,
-      user_pw: passwords
+      user_pw: passwords,
+      category
     };
     console.log(newObject);
     writePost(newObject);

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   resetValue,
@@ -14,6 +14,7 @@ import { StyledAddressDiv, StyledMapDiv } from './StyledMapApi';
 import { supabase } from '../../../supabase/supabase';
 import { useQuery } from '@tanstack/react-query';
 import { StyledLocation, StyledLocationName } from '../PostDetail/PostDetail.style';
+import { getPost } from '../../../supabase/post.api';
 
 const MapApI = () => {
   const dispatch = useDispatch();
@@ -25,25 +26,23 @@ const MapApI = () => {
   const road = useSelector((state) => state.mapSlice.road);
   const bunji = useSelector((state) => state.mapSlice.bunji);
 
+  const [posts, setPosts] = useState([]);
+
   const mapRef = useRef(null);
   const markerRef = useRef(null);
   const infowindowRef = useRef(null);
 
-  const { data } = useQuery({
-    queryKey: ['mapApi_test'],
-    queryFn: async () => {
-      const { data } = await supabase.from('mapApi_test').select('lat,lng');
-      return data;
-    }
-  });
-
   useEffect(() => {
-    if (data && data.length > 0) {
-      const { lat, lng } = data[0];
-      dispatch(setLat(lat));
-      dispatch(setLng(lng));
-    }
-  }, [data, dispatch]);
+    const fetchData = async () => {
+      try {
+        const data = await getPost();
+        setPosts(data);
+      } catch (error) {
+        console.error('Error fetching posts:', error);
+      }
+    };
+    fetchData();
+  }, []);
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -82,13 +81,13 @@ const MapApI = () => {
   const initializeMap = () => {
     const container = document.getElementById('map');
     const options = {
-      center: new kakao.maps.LatLng(lat, lng),
+      center: new kakao.maps.LatLng(posts.map_lat, posts.map_lng),
       level: 3
     };
     const map = new kakao.maps.Map(container, options);
     mapRef.current = map;
 
-    const markerPosition = new kakao.maps.LatLng(lat, lng);
+    const markerPosition = new kakao.maps.LatLng(posts.map_lat, posts.map_lng);
     const marker = new kakao.maps.Marker({
       position: markerPosition
     });
@@ -158,7 +157,7 @@ const MapApI = () => {
   };
 
   useEffect(() => {
-    console.log('데이터값:', data);
+    console.log('데베 위도:', posts.map_lat);
     console.log('현재 위도:', lat);
     console.log('현재 경도:', lng);
     console.log('유저위치:', user_lat, user_lng);
