@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 // 스타일 객체 정의
 export const StyleFormConatiner = styled.div`
-  height: 474px;
+  height: auto;
   display: flex;
   flex-direction: column;
   padding: 20px;

@@ -162,7 +162,7 @@ const MapApI = () => {
     console.log('현재 위도:', lat);
     console.log('현재 경도:', lng);
     console.log('유저위치:', user_lat, user_lng);
-    console.log('유저와 마커사이의 거리:', distanceFromMe);
+    console.log('유저와 마커사이의 거리:', distanceFromMe, 'km');
     console.log('도로명 주소:', road);
     console.log('지번 주소:', bunji);
   }, [lat, lng, road, bunji]);
