@@ -4,6 +4,8 @@ import { getPosts } from '../../../supabase/post.api';
 import { useNavigate } from 'react-router-dom';
 import { StyledLogoDiv } from '../Navbar/StyledNavbar';
 import MainMapTitle from './MainMapTitle';
+import { useSelector } from 'react-redux';
+import postsSlice from '../../redux/slice/postsSlice';
 
 const StyledMainMapsContainer = styled.div`
   display: flex;
@@ -65,6 +67,9 @@ const StyledSubContent = styled.p`
 function MainMaps() {
   const [posts, setPosts] = useState([]);
   const navigate = useNavigate();
+  const searchKeyword = useSelector((state) => state.postsSlice.postsData);
+
+  console.log(searchKeyword);
 
   useEffect(() => {
     const fetchData = async () => {
