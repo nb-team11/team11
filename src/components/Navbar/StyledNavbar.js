@@ -64,8 +64,7 @@ export const StyledButton = styled.button`
   cursor: pointer;
 `;
 
-export const StyledLogoDiv = styled.div`
-  background-image: url('/public/towntalk_banner.png') !important;
+export const StyledLogoDiv = styled.img`
   background-repeat: no-repeat;
   height: 450px;
   background-size: cover;

@@ -126,7 +126,7 @@ function MainMaps() {
 
   return (
     <>
-      <StyledLogoDiv></StyledLogoDiv>
+      <StyledLogoDiv src="src\logoImages\towntalk_banner.png"></StyledLogoDiv>
       <MainMapTitle />
 
       <StyledMainMapsContainer>
