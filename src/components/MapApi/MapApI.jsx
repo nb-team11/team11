@@ -125,7 +125,7 @@ const MapApI = () => {
 
     // 여기
     // updateInfowindow(lat, lng); // 초기 위치에 대한 인포윈도우 정보 업데이트
-    updateInfowindow(user_lat, user_lng); // 초기 위치에 대한 인포윈도우 정보 업데이트
+    updateInfowindow(lat, lng); // 초기 위치에 대한 인포윈도우 정보 업데이트
 
     kakao.maps.event.addListener(map, 'click', function (mouseEvent) {
       const latlng = mouseEvent.latLng;
