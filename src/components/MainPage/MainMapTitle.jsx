@@ -66,7 +66,7 @@ function MainMapTitle() {
   return (
     <StyledSearchContainer>
       <StyledSearchLocation>
-        <StyledSearchIcon src="./free-icon-location-3865991.png" alt="위치아이콘" />
+        <StyledSearchIcon src="src\logoImages\free-icon-location-3865991.png" alt="위치아이콘" />
         <StyledSearchTitle>"{getFormattedPlace(my_place)}"의 소모임이 궁금하다면?</StyledSearchTitle>
       </StyledSearchLocation>
     </StyledSearchContainer>
